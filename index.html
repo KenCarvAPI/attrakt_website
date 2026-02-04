@@ -117,11 +117,11 @@
         .btn-secondary:hover { background: rgba(0,102,255,0.1); border-color: var(--secondary); }
 
         /* Logos */
-        .logos { padding: 4rem 2rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: linear-gradient(180deg, rgba(201,162,39,0.03) 0%, transparent 100%); width: 100%; }
+        .logos { padding: 4rem 2rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: transparent; width: 100%; }
         .logos-label { text-align: center; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-dim); margin-bottom: 2rem; }
-        .logos-grid { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; opacity: 0.6; }
-        .logos-grid span { font-size: 1rem; font-weight: 500; color: var(--text-muted); transition: color 0.3s; }
-        .logos-grid span:hover { color: var(--primary); }
+        .logos-grid { display: flex; justify-content: center; align-items: center; gap: 3rem; flex-wrap: wrap; opacity: 0.7; }
+        .logos-grid img { height: 40px; width: 120px; object-fit: contain; filter: grayscale(100%) brightness(1.5); transition: filter 0.3s, opacity 0.3s; opacity: 0.8; }
+        .logos-grid img:hover { filter: grayscale(0%) brightness(1); opacity: 1; }
 
         /* Sections */
         section { padding: 8rem 2rem; max-width: 1400px; margin: 0 auto; }
@@ -723,18 +723,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
-            font-family: 'Playfair Display', serif;
-            font-weight: 500;
             color: var(--bg);
             flex-shrink: 0;
             transition: all 0.3s var(--ease);
         }
+        .ecosystem-node-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--bg);
+        }
         
-        .ecosystem-node:nth-child(1) .ecosystem-node-icon { background: linear-gradient(135deg, var(--primary), var(--primary-light)); }
-        .ecosystem-node:nth-child(2) .ecosystem-node-icon { background: linear-gradient(135deg, var(--primary-light), #f5d76e); }
-        .ecosystem-node:nth-child(3) .ecosystem-node-icon { background: linear-gradient(135deg, var(--secondary), #3388ff); }
-        .ecosystem-node:nth-child(4) .ecosystem-node-icon { background: linear-gradient(135deg, var(--accent), #00ffcc); }
+        .ecosystem-node .ecosystem-node-icon { background: linear-gradient(135deg, var(--primary), var(--primary-light)); }
         
         .ecosystem-node:hover .ecosystem-node-icon {
             transform: scale(1.1);
@@ -806,21 +805,165 @@
             padding: 2rem; background: var(--bg-elevated); border: 1px solid var(--border);
             border-radius: 16px; text-align: center; transition: all 0.4s var(--ease);
         }
-        .agent-card:nth-child(1):hover { transform: translateY(-8px); border-color: var(--primary); }
-        .agent-card:nth-child(2):hover { transform: translateY(-8px); border-color: var(--primary-light); }
-        .agent-card:nth-child(3):hover { transform: translateY(-8px); border-color: var(--secondary); }
-        .agent-card:nth-child(4):hover { transform: translateY(-8px); border-color: var(--accent); }
+        .agent-card:hover { transform: translateY(-8px); border-color: var(--primary); }
         .agent-icon {
-            width: 56px; height: 56px;
-            border-radius: 14px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;
+            width: 64px; height: 64px;
+            border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;
+            position: relative;
             font-size: 1.5rem; font-family: 'Playfair Display', serif; font-weight: 500; color: var(--bg);
         }
-        .agent-card:nth-child(1) .agent-icon { background: linear-gradient(135deg, var(--primary), var(--primary-light)); }
-        .agent-card:nth-child(2) .agent-icon { background: linear-gradient(135deg, var(--primary-light), #f5d76e); }
-        .agent-card:nth-child(3) .agent-icon { background: linear-gradient(135deg, var(--secondary), #3388ff); }
-        .agent-card:nth-child(4) .agent-icon { background: linear-gradient(135deg, var(--accent), #00ffcc); }
+        .agent-icon svg {
+            stroke: var(--bg);
+            z-index: 1;
+        }
+        /* Agent avatar styling - robot-like appearance */
+        .agent-icon::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px dashed currentColor;
+            opacity: 0.3;
+            animation: agent-orbit 10s linear infinite;
+        }
+        .agent-icon::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            width: 10px;
+            height: 10px;
+            background: currentColor;
+            border-radius: 50%;
+            animation: agent-blink 3s ease-in-out infinite;
+            box-shadow: 0 0 8px currentColor;
+        }
+        @keyframes agent-orbit {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes agent-blink {
+            0%, 90%, 100% { opacity: 1; transform: scale(1); }
+            95% { opacity: 0.3; transform: scale(0.8); }
+        }
+        .agent-icon { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-light)); 
+            box-shadow: 0 0 30px rgba(201,162,39,0.3);
+        }
+        .agent-icon::before,
+        .agent-icon::after { color: var(--primary); }
+        .agent-card:hover .agent-icon::before {
+            animation-duration: 3s;
+        }
         .agent-card h3 { font-size: 1rem; margin-bottom: 0.5rem; }
         .agent-card p { font-size: 0.85rem; color: var(--text-muted); font-weight: 300; }
+        /* Agent status indicator */
+        .agent-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 1rem;
+            padding: 0.35rem 0.75rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 100px;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+        }
+        .agent-status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: status-blink 2s ease-in-out infinite;
+        }
+        .agent-card:nth-child(1) .agent-status-dot { background: var(--primary); }
+        .agent-card:nth-child(2) .agent-status-dot { background: var(--primary-light); }
+        .agent-card:nth-child(3) .agent-status-dot { background: var(--secondary); }
+        .agent-card:nth-child(4) .agent-status-dot { background: var(--accent); }
+
+        /* Activations */
+        .activations { background: var(--bg-elevated); max-width: none; width: 100%; }
+        .activations > .reveal { max-width: 1200px; margin: 0 auto; }
+        .activations-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .activation-card {
+            padding: 2rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: all 0.4s var(--ease);
+            position: relative;
+            overflow: hidden;
+        }
+        .activation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .activation-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(201,162,39,0.4);
+            box-shadow: 0 20px 40px rgba(201,162,39,0.15);
+        }
+        .activation-card:hover::before { opacity: 1; }
+        .activation-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            transition: transform 0.3s var(--ease);
+        }
+        .activation-icon svg {
+            stroke: var(--bg);
+        }
+        .activation-card:hover .activation-icon {
+            transform: scale(1.1);
+        }
+        .activation-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        .activation-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+        .activation-tag {
+            display: inline-block;
+            padding: 0.4rem 0.85rem;
+            background: rgba(201,162,39,0.1);
+            border: 1px solid rgba(201,162,39,0.25);
+            border-radius: 100px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary);
+        }
+        @media (max-width: 1024px) {
+            .activations-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .activations-grid { grid-template-columns: 1fr; }
+        }
 
         /* Spaces */
         .spaces { background: var(--bg-elevated); max-width: none; width: 100%; }
@@ -900,6 +1043,7 @@
         .contact-info { padding: 6rem 3rem; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--border); }
         .contact-info h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3vw, 2.75rem); margin-bottom: 1rem; }
         .contact-info > p { color: var(--text-muted); font-size: 1rem; margin-bottom: 2.5rem; font-weight: 300; line-height: 1.8; }
+        .contact-info .contact-summary { margin-bottom: 1.5rem; }
         .contact-details { display: flex; flex-direction: column; gap: 1.25rem; }
         .contact-detail { display: flex; align-items: center; gap: 1rem; }
         .contact-detail-icon {
@@ -1013,7 +1157,12 @@
     <section class="logos">
         <p class="logos-label">Trusted by technology leaders across Web2 and Web3</p>
         <div class="logos-grid">
-            <span>Eliza Labs</span><span>API3</span><span>eOracle</span><span>The Grid</span><span>8004 & Ethereum Foundation</span><span>Assisterr</span>
+            <img src="public/logos/ElizaOS.svg" alt="Eliza Labs">
+            <img src="public/logos/API%23.svg" alt="API3">
+            <img src="public/logos/eOracle.png" alt="eOracle" style="width: 160px;">
+            <img src="public/logos/The Grid.png" alt="The Grid">
+            <img src="public/logos/8004logowhite.png" alt="8004 & Ethereum Foundation">
+            <img src="public/logos/Assisterr.svg" alt="Assisterr">
         </div>
     </section>
 
@@ -1115,7 +1264,11 @@
                     <!-- Node 1: Community Health -->
                     <div class="ecosystem-node">
                         <div class="ecosystem-node-header">
-                            <div class="ecosystem-node-icon">H</div>
+                            <div class="ecosystem-node-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                                </svg>
+                            </div>
                             <h4>Community Health Scoring</h4>
                         </div>
                         <p>Real-time sentiment and engagement across all channels</p>
@@ -1128,7 +1281,11 @@
                     <!-- Node 2: Champion ID -->
                     <div class="ecosystem-node">
                         <div class="ecosystem-node-header">
-                            <div class="ecosystem-node-icon">C</div>
+                            <div class="ecosystem-node-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </div>
                             <h4>Champion Identification</h4>
                         </div>
                         <p>AI-powered discovery of high-potential advocates</p>
@@ -1141,7 +1298,16 @@
                     <!-- Node 3: Journey Analytics -->
                     <div class="ecosystem-node">
                         <div class="ecosystem-node-header">
-                            <div class="ecosystem-node-icon">J</div>
+                            <div class="ecosystem-node-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="20" x2="18" y2="10"/>
+                                    <line x1="12" y1="20" x2="12" y2="4"/>
+                                    <line x1="6" y1="20" x2="6" y2="14"/>
+                                    <path d="M3 3l7.07 7.07"/>
+                                    <path d="M10.07 10.07L17 3"/>
+                                    <polyline points="14 3 17 3 17 6"/>
+                                </svg>
+                            </div>
                             <h4>Journey Analytics</h4>
                         </div>
                         <p>Funnel tracking from awareness to advocacy</p>
@@ -1154,7 +1320,14 @@
                     <!-- Node 4: Program ROI -->
                     <div class="ecosystem-node">
                         <div class="ecosystem-node-header">
-                            <div class="ecosystem-node-icon">R</div>
+                            <div class="ecosystem-node-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 6v6l4 2"/>
+                                    <path d="M16 16l2 2"/>
+                                    <path d="M8 16l-2 2"/>
+                                </svg>
+                            </div>
                             <h4>Program ROI</h4>
                         </div>
                         <p>Attribution for every initiative and campaign</p>
@@ -1172,7 +1345,7 @@
         <div class="reveal">
             <p class="section-label">What We Do</p>
             <h2 class="section-title">Premium services, powered by intelligence</h2>
-            <p class="section-desc">High-touch developer experience and community programs, underpinned by data-driven insights and AI agents that multiply your team's impact.</p>
+            <p class="section-desc">An always-on, retained ecosystem growth service combining strategy, content, and developer marketing—powered by intelligence and designed to scale with your team.</p>
         </div>
         <div class="services-wrapper">
             <!-- Flow connectors -->
@@ -1230,13 +1403,112 @@
         <div class="reveal">
             <p class="section-label">AI Agent Swarm</p>
             <h2 class="section-title">An intelligent workforce for your organization</h2>
-            <p class="section-desc">Available as a standalone product or bundled with our retained services—our AI agent swarm operates as a coordinated system, powered by Attrakt Intelligence. Each agent shares context and insights, working together to amplify your team's capabilities across documentation, community, security, and growth.</p>
+            <p class="section-desc">Our AI agent swarm supercharges every retained engagement by combining real-time data, proven strategy, and intelligent automation. Each agent shares context across your ecosystem—turning insights into action and multiplying your team's impact across documentation, community, security, and growth.</p>
         </div>
         <div class="agents-grid">
-            <div class="agent-card reveal"><div class="agent-icon">A</div><h3>Audit Agent</h3><p>Security scanning and code review for community contributions</p></div>
-            <div class="agent-card reveal"><div class="agent-icon">C</div><h3>Community Agent</h3><p>Monitors channels, triages questions, and surfaces insights</p></div>
-            <div class="agent-card reveal"><div class="agent-icon">D</div><h3>Docs Agent</h3><p>Auto-generates and maintains documentation from your codebase</p></div>
-            <div class="agent-card reveal"><div class="agent-icon">G</div><h3>Growth Agent</h3><p>Identifies opportunities and automates outreach at scale</p></div>
+            <div class="agent-card reveal">
+                <div class="agent-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <h3>Audit Agent</h3>
+                <p>Security scanning and code review for community contributions</p>
+            </div>
+            <div class="agent-card reveal">
+                <div class="agent-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h3>Community Agent</h3>
+                <p>Monitors channels, triages questions, and surfaces insights</p>
+            </div>
+            <div class="agent-card reveal">
+                <div class="agent-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                </div>
+                <h3>Docs Agent</h3>
+                <p>Auto-generates and maintains documentation from your codebase</p>
+            </div>
+            <div class="agent-card reveal">
+                <div class="agent-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                        <polyline points="17 6 23 6 23 12"/>
+                    </svg>
+                </div>
+                <h3>Growth Agent</h3>
+                <p>Identifies opportunities and automates outreach at scale</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="activations" id="activations">
+        <div class="reveal">
+            <p class="section-label">Premium Developer Activations</p>
+            <h2 class="section-title">High-touch experiences that create lasting impact</h2>
+            <p class="section-desc">Bespoke, high-touch activations delivered on top of your retainer—transforming engaged developers into passionate advocates through unforgettable experiences.</p>
+        </div>
+        <div class="activations-grid">
+            <div class="activation-card reveal">
+                <div class="activation-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <h3>Exclusive Retreats</h3>
+                <p>Intimate gatherings in inspiring locations bringing together your top developers for deep technical sessions and relationship building</p>
+                <div class="activation-tag">High-touch</div>
+            </div>
+            <div class="activation-card reveal">
+                <div class="activation-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                        <polyline points="2 17 12 22 22 17"/>
+                        <polyline points="2 12 12 17 22 12"/>
+                    </svg>
+                </div>
+                <h3>Hackathon Experiences</h3>
+                <p>Premium hackathons with expert mentorship, high-value prizes, and pathways to grants or investment for standout projects</p>
+                <div class="activation-tag">Build together</div>
+            </div>
+            <div class="activation-card reveal">
+                <div class="activation-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="2" y1="12" x2="22" y2="12"/>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                </div>
+                <h3>Global Roadshows</h3>
+                <p>Curated developer meetups and workshops in key tech hubs, creating local communities connected to your global ecosystem</p>
+                <div class="activation-tag">Scale globally</div>
+            </div>
+            <div class="activation-card reveal">
+                <div class="activation-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                        <path d="M5 8H4a4 4 0 0 0 0 8h1"/>
+                        <line x1="6" y1="12" x2="18" y2="12"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                </div>
+                <h3>Developer Pop-Ups</h3>
+                <p>Surprise activations and immersive experiences that spark conversation, build culture, and create moments developers share organically</p>
+                <div class="activation-tag">Culture catalyst</div>
+            </div>
         </div>
     </section>
 
@@ -1244,6 +1516,13 @@
         <div class="contact-inner">
             <div class="contact-info">
                 <h2 class="reveal">Let's build something together</h2>
+                <p class="reveal">We help technology companies grow through ecosystem development and developer marketing—backed by intelligence, retained partnerships, AI agents, and premium activations.</p>
+                <ul class="reveal contact-summary">
+                    <li><strong>Intelligence</strong> — research &amp; insights</li>
+                    <li><strong>Retained services</strong> — ecosystem &amp; developer marketing</li>
+                    <li><strong>Agents</strong> — AI-powered engagement at scale</li>
+                    <li><strong>Premium activations</strong> — events &amp; campaigns</li>
+                </ul>
                 <p class="reveal">Whether you're a developer platform, open-source project, blockchain protocol, or any technology company looking to grow through developer advocacy—we'd love to hear from you.</p>
                 <div class="contact-details reveal">
                     <div class="contact-detail"><div class="contact-detail-icon">✉️</div><div><p class="contact-detail-text">Email us at</p><p class="contact-detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1b9b4bdbdbe91b0a5a5a3b0baa5ffb8be">[email&#160;protected]</a></p></div></div>
