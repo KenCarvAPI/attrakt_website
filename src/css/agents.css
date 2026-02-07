@@ -1,0 +1,116 @@
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+
+.agent-card {
+  padding: 2rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: all 0.4s var(--ease);
+}
+
+.agent-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-glow);
+}
+
+.agent-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-size: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  color: var(--bg);
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  box-shadow: 0 0 30px rgba(201, 162, 39, 0.3);
+}
+
+.agent-icon svg {
+  stroke: var(--bg);
+  z-index: 1;
+}
+
+.agent-icon::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px dashed var(--primary);
+  opacity: 0.3;
+  animation: agent-orbit 10s linear infinite;
+}
+
+.agent-icon::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 10px;
+  height: 10px;
+  background: var(--primary);
+  border-radius: 50%;
+  animation: agent-blink 3s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--primary);
+}
+
+@keyframes agent-orbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes agent-blink {
+  0%, 90%, 100% { opacity: 1; transform: scale(1); }
+  95% { opacity: 0.3; transform: scale(0.8); }
+}
+
+.agent-card:hover .agent-icon::before {
+  animation-duration: 3s;
+}
+
+.agent-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.agent-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.agent-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-full);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.agent-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: status-blink 2s ease-in-out infinite;
+}
+
+.agent-card:nth-child(1) .agent-status-dot { background: var(--primary); }
+.agent-card:nth-child(2) .agent-status-dot { background: var(--primary-light); }
+.agent-card:nth-child(3) .agent-status-dot { background: var(--secondary); }
+.agent-card:nth-child(4) .agent-status-dot { background: var(--accent); }

@@ -1,0 +1,40 @@
+.logos {
+  padding: 4rem 2rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  width: 100%;
+}
+
+.logos-label {
+  text-align: center;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+}
+
+.logos-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  opacity: 0.7;
+}
+
+.logos-grid img {
+  height: 40px;
+  width: 120px;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(1.5);
+  transition: filter 0.4s var(--ease), opacity 0.4s var(--ease), transform 0.4s var(--ease);
+  opacity: 0.8;
+}
+
+.logos-grid img:hover {
+  filter: grayscale(0%) brightness(1);
+  opacity: 1;
+  transform: scale(1.05);
+}

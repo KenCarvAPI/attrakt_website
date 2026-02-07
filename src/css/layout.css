@@ -1,0 +1,91 @@
+section {
+  padding: 8rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--text) 0%, var(--text) 60%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  font-weight: 300;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transform: skewX(-25deg);
+  transition: left 0.6s var(--ease);
+}
+
+.btn:hover::after {
+  left: 125%;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: var(--bg);
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px var(--primary-glow);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(0, 102, 255, 0.4);
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 102, 255, 0.1);
+  border-color: var(--secondary);
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 5rem 1.5rem;
+  }
+}
