@@ -38,13 +38,13 @@
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 12px;
-  transition: all 0.4s var(--ease);
+  transition: transform 0.6s var(--ease-out), border-color 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
 }
 
 .philosophy-point:hover {
-  transform: translateX(8px);
-  border-color: var(--primary);
-  box-shadow: var(--shadow-glow);
+  transform: translateX(6px);
+  border-color: rgba(201, 162, 39, 0.25);
+  box-shadow: 0 0 30px rgba(201, 162, 39, 0.08);
 }
 
 .philosophy-point-num {
@@ -84,16 +84,16 @@
   position: absolute;
   inset: 60px;
   border-radius: 50%;
-  border: 3px solid rgba(201, 162, 39, 0.4);
-  animation: flywheel-rotate 25s linear infinite;
+  border: 2px solid rgba(201, 162, 39, 0.3);
+  animation: flywheel-rotate 40s linear infinite;
 }
 
 .flywheel-ring-inner {
   position: absolute;
   inset: 100px;
   border-radius: 50%;
-  border: 1px dashed rgba(201, 162, 39, 0.2);
-  animation: flywheel-rotate 20s linear infinite reverse;
+  border: 1px dashed rgba(201, 162, 39, 0.15);
+  animation: flywheel-rotate 35s linear infinite reverse;
 }
 
 .flywheel-ring-glow {
@@ -109,8 +109,8 @@
 }
 
 @keyframes glow-pulse {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.02); }
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.01); }
 }
 
 .flywheel-center {
@@ -136,8 +136,8 @@
   position: absolute;
   inset: -6px;
   border-radius: 50%;
-  border: 2px solid rgba(201, 162, 39, 0.5);
-  animation: flywheel-rotate 10s linear infinite;
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  animation: flywheel-rotate 20s linear infinite;
 }
 
 .flywheel-center-icon {
@@ -156,7 +156,7 @@
 
 @keyframes icon-pulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+  50% { transform: scale(1.06); }
 }
 
 .flywheel-stage {
@@ -167,13 +167,14 @@
   border: 2px solid var(--border);
   border-radius: var(--radius-md);
   text-align: center;
-  transition: all 0.4s var(--ease);
+  transition: border-color 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out), transform 0.6s var(--ease-out);
   z-index: 5;
 }
 
 .flywheel-stage:hover {
   z-index: 20;
-  box-shadow: 0 0 50px rgba(201, 162, 39, 0.3);
+  transform: scale(1.03);
+  box-shadow: 0 0 40px rgba(201, 162, 39, 0.15);
 }
 
 .flywheel-stage-1 {
@@ -247,51 +248,51 @@
 
 .flywheel-arrow-path-1 {
   stroke: var(--primary);
-  stroke-dasharray: 8 6;
-  animation: arrow-flow 2s linear infinite;
+  stroke-dasharray: 8 8;
+  animation: arrow-flow 4s linear infinite;
 }
 
 .flywheel-arrow-path-2 {
   stroke: var(--primary);
-  stroke-dasharray: 8 6;
-  animation: arrow-flow 2s linear infinite 0.66s;
+  stroke-dasharray: 8 8;
+  animation: arrow-flow 4s linear infinite 1.33s;
 }
 
 .flywheel-arrow-path-3 {
   stroke: var(--primary);
-  stroke-dasharray: 8 6;
-  animation: arrow-flow 2s linear infinite 1.33s;
+  stroke-dasharray: 8 8;
+  animation: arrow-flow 4s linear infinite 2.66s;
 }
 
 @keyframes arrow-flow {
-  to { stroke-dashoffset: -28; }
+  to { stroke-dashoffset: -32; }
 }
 
 /* Particles */
 .flywheel-particle {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   filter: blur(1px);
 }
 
 .flywheel-particle-1 {
   background: var(--primary-light);
-  box-shadow: 0 0 15px var(--primary);
-  animation: particle-1 4s ease-in-out infinite;
+  box-shadow: 0 0 12px var(--primary);
+  animation: particle-1 6s ease-in-out infinite;
 }
 
 .flywheel-particle-2 {
   background: var(--primary-light);
-  box-shadow: 0 0 15px var(--primary);
-  animation: particle-2 4s ease-in-out infinite 1.33s;
+  box-shadow: 0 0 12px var(--primary);
+  animation: particle-2 6s ease-in-out infinite 2s;
 }
 
 .flywheel-particle-3 {
   background: var(--primary-light);
-  box-shadow: 0 0 15px var(--primary);
-  animation: particle-3 4s ease-in-out infinite 2.66s;
+  box-shadow: 0 0 12px var(--primary);
+  animation: particle-3 6s ease-in-out infinite 4s;
 }
 
 @keyframes particle-1 {
@@ -326,30 +327,30 @@
 .flywheel-arrowhead-1 {
   top: 38%;
   right: 8%;
-  border-width: 6px 0 6px 10px;
+  border-width: 5px 0 5px 8px;
   border-color: transparent transparent transparent var(--primary);
-  animation: arrowhead-pulse 2s ease-in-out infinite;
+  animation: arrowhead-pulse 3.5s ease-in-out infinite;
 }
 
 .flywheel-arrowhead-2 {
   bottom: 28%;
   left: 22%;
-  border-width: 6px 10px 6px 0;
+  border-width: 5px 8px 5px 0;
   border-color: transparent var(--primary) transparent transparent;
-  animation: arrowhead-pulse 2s ease-in-out infinite 0.66s;
+  animation: arrowhead-pulse 3.5s ease-in-out infinite 1.16s;
 }
 
 .flywheel-arrowhead-3 {
   top: 18%;
   left: 38%;
-  border-width: 0 6px 10px 6px;
+  border-width: 0 5px 8px 5px;
   border-color: transparent transparent var(--primary) transparent;
-  animation: arrowhead-pulse 2s ease-in-out infinite 1.33s;
+  animation: arrowhead-pulse 3.5s ease-in-out infinite 2.33s;
 }
 
 @keyframes arrowhead-pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
 }
 
 /* Responsive */

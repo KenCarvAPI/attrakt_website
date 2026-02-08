@@ -30,11 +30,11 @@
   gap: 1.5rem;
   padding: 1.75rem 0;
   border-bottom: 1px solid var(--border);
-  transition: transform 0.3s var(--ease);
+  transition: transform 0.6s var(--ease-out);
 }
 
 .agents-item:hover {
-  transform: translateX(6px);
+  transform: translateX(4px);
 }
 
 .agents-item:first-child {
@@ -51,7 +51,7 @@
   border-radius: 3px;
   background: rgba(201, 162, 39, 0.2);
   flex-shrink: 0;
-  transition: background 0.4s var(--ease);
+  transition: background 0.6s var(--ease-out);
 }
 
 .agents-item:hover .agents-item-indicator {

@@ -35,14 +35,14 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 1.75rem;
-  transition: all 0.4s var(--ease);
+  transition: transform 0.6s var(--ease-out), border-color 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
   position: relative;
 }
 
 .data-source:hover {
-  border-color: var(--primary);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(201, 162, 39, 0.1);
+  border-color: rgba(201, 162, 39, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(201, 162, 39, 0.06);
 }
 
 .data-source-icon {
@@ -119,7 +119,7 @@
   height: 6px;
   background: var(--primary);
   border-radius: 50%;
-  animation: pulse-blink 2s ease-in-out infinite;
+  animation: pulse-blink 3s ease-in-out infinite;
 }
 
 .data-source-pulse span {
@@ -167,22 +167,22 @@
   height: 6px;
   background: var(--primary);
   border-radius: 50%;
-  animation: flow-dot 2s ease-in-out infinite;
+  animation: flow-dot 3s var(--ease-in-out) infinite;
   z-index: 2;
 }
 
 .data-flow-line:nth-child(2)::before {
-  animation-delay: 0.3s;
+  animation-delay: 0.5s;
 }
 
 .data-flow-line:nth-child(3)::before {
-  animation-delay: 0.6s;
+  animation-delay: 1s;
 }
 
 @keyframes flow-dot {
   0% { bottom: 100%; opacity: 0; }
-  20% { opacity: 1; }
-  80% { opacity: 1; }
+  15% { opacity: 0.8; }
+  85% { opacity: 0.8; }
   100% { bottom: 0; opacity: 0; }
 }
 
@@ -193,21 +193,21 @@
 .data-flow-lines-out .data-flow-line::before {
   bottom: auto;
   top: 0;
-  animation: flow-dot-out 2s ease-in-out infinite;
+  animation: flow-dot-out 3s var(--ease-in-out) infinite;
 }
 
 .data-flow-lines-out .data-flow-line:nth-child(2)::before {
-  animation-delay: 0.3s;
+  animation-delay: 0.5s;
 }
 
 .data-flow-lines-out .data-flow-line:nth-child(3)::before {
-  animation-delay: 0.6s;
+  animation-delay: 1s;
 }
 
 @keyframes flow-dot-out {
   0% { top: 0; opacity: 0; }
-  20% { opacity: 1; }
-  80% { opacity: 1; }
+  15% { opacity: 0.8; }
+  85% { opacity: 0.8; }
   100% { top: 100%; opacity: 0; }
 }
 
@@ -299,13 +299,14 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 1.5rem;
-  transition: all 0.4s var(--ease);
+  transition: transform 0.6s var(--ease-out), border-color 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
   text-align: center;
 }
 
 .data-output:hover {
-  border-color: rgba(201, 162, 39, 0.3);
+  border-color: rgba(201, 162, 39, 0.2);
   transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(201, 162, 39, 0.04);
 }
 
 .data-output-icon {

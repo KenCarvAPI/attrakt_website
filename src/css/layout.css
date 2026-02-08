@@ -52,7 +52,7 @@ section {
   letter-spacing: 0.02em;
   border-radius: var(--radius-full);
   text-decoration: none;
-  transition: all 0.3s var(--ease);
+  transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out), background 0.6s var(--ease-out), border-color 0.6s var(--ease-out), color 0.6s var(--ease-out);
   border: none;
   cursor: pointer;
   position: relative;
@@ -66,9 +66,9 @@ section {
   left: -75%;
   width: 50%;
   height: 200%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   transform: skewX(-25deg);
-  transition: left 0.6s var(--ease);
+  transition: left 0.8s var(--ease-out);
 }
 
 .btn:hover::after {
@@ -83,18 +83,18 @@ section {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 15px 40px var(--primary-glow);
+  box-shadow: 0 12px 35px rgba(201, 162, 39, 0.3);
 }
 
 .btn-secondary {
   background: transparent;
   color: var(--text);
-  border: 1px solid rgba(201, 162, 39, 0.3);
+  border: 1px solid rgba(201, 162, 39, 0.25);
 }
 
 .btn-secondary:hover {
-  background: rgba(201, 162, 39, 0.08);
-  border-color: var(--primary);
+  background: rgba(201, 162, 39, 0.06);
+  border-color: rgba(201, 162, 39, 0.5);
   color: var(--primary-light);
 }
 

@@ -6,7 +6,7 @@ nav {
   z-index: 100;
   padding: 1.25rem 3rem;
   background: transparent;
-  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+  transition: background 0.6s var(--ease-out), backdrop-filter 0.6s var(--ease-out), border-color 0.6s var(--ease-out);
   border-bottom: 1px solid transparent;
 }
 
@@ -30,13 +30,13 @@ nav.scrolled {
   font-size: 1.5rem;
   color: #ffffff;
   text-decoration: none;
-  transition: opacity 0.3s;
+  transition: opacity 0.5s var(--ease-out);
   position: relative;
   z-index: 101;
 }
 
 .logo:hover {
-  opacity: 0.8;
+  opacity: 0.75;
 }
 
 .nav-links {
@@ -48,7 +48,7 @@ nav.scrolled {
   color: var(--text-muted);
   text-decoration: none;
   font-size: 0.9rem;
-  transition: color 0.3s;
+  transition: color 0.5s var(--ease-out);
   position: relative;
 }
 
@@ -60,7 +60,7 @@ nav.scrolled {
   width: 0;
   height: 1px;
   background: var(--primary);
-  transition: width 0.3s var(--ease);
+  transition: width 0.5s var(--ease-out);
 }
 
 .nav-links a:hover {
@@ -85,12 +85,12 @@ nav.scrolled {
   font-size: 0.875rem;
   font-weight: 500;
   border-radius: var(--radius-full);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
 }
 
 .nav-cta:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 30px var(--primary-glow);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(201, 162, 39, 0.25);
 }
 
 .nav-toggle {
