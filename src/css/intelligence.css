@@ -214,7 +214,7 @@
 .data-platform-hub {
   position: relative;
   width: 100%;
-  padding: 1.25rem 2rem;
+  padding: 0.5rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -222,8 +222,8 @@
 
 .data-platform-hub-glow {
   position: absolute;
-  inset: -20px;
-  background: radial-gradient(ellipse at center, rgba(201, 162, 39, 0.08) 0%, transparent 70%);
+  inset: -30px -60px;
+  background: radial-gradient(ellipse at center, rgba(201, 162, 39, 0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -231,35 +231,59 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
-  padding: 1.25rem 3rem;
-  background: var(--bg);
-  border: 2px solid var(--primary);
-  border-radius: var(--radius-full);
-  box-shadow: 0 0 40px rgba(201, 162, 39, 0.15), inset 0 1px 0 rgba(201, 162, 39, 0.1);
+  width: 100%;
+  padding: 1.5rem 2rem;
+  background:
+    linear-gradient(135deg, rgba(201, 162, 39, 0.06) 0%, rgba(201, 162, 39, 0.02) 50%, rgba(201, 162, 39, 0.06) 100%);
+  border-top: 1px solid rgba(201, 162, 39, 0.25);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.data-platform-hub-inner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(201, 162, 39, 0.4) 30%, rgba(201, 162, 39, 0.4) 70%, transparent 100%);
+}
+
+.data-platform-hub-inner::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(201, 162, 39, 0.4) 30%, rgba(201, 162, 39, 0.4) 70%, transparent 100%);
 }
 
 .data-platform-hub-logo {
   font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 500;
   color: var(--primary);
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--primary-subtle);
+  background: rgba(201, 162, 39, 0.12);
   border-radius: 50%;
   border: 1px solid rgba(201, 162, 39, 0.3);
   flex-shrink: 0;
 }
 
 .data-platform-hub-label {
-  font-size: 1rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  color: var(--text);
-  letter-spacing: 0.02em;
+  color: var(--primary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
