@@ -2,6 +2,19 @@ footer {
   padding: 3rem 2rem;
   border-top: 1px solid var(--border);
   background: linear-gradient(180deg, transparent 0%, rgba(201, 162, 39, 0.03) 100%);
+  position: relative;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  max-width: 600px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.2), transparent);
 }
 
 .footer-inner {
@@ -32,8 +45,9 @@ footer {
 .footer-links a {
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   transition: color 0.3s;
+  letter-spacing: 0.01em;
 }
 
 .footer-links a:hover {
@@ -41,8 +55,9 @@ footer {
 }
 
 .footer-copy {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-dim);
+  letter-spacing: 0.02em;
 }
 
 @media (max-width: 768px) {

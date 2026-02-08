@@ -8,20 +8,22 @@
 
 .logos-label {
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.25em;
   color: var(--text-dim);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
 }
 
 .logos-grid {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 3.5rem;
   flex-wrap: wrap;
-  opacity: 0.7;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .logos-grid img {
@@ -29,12 +31,23 @@
   width: 120px;
   object-fit: contain;
   filter: grayscale(100%) brightness(1.5);
-  transition: filter 0.4s var(--ease), opacity 0.4s var(--ease), transform 0.4s var(--ease);
-  opacity: 0.8;
+  transition: filter 0.5s var(--ease), opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  opacity: 0.5;
 }
 
 .logos-grid img:hover {
   filter: grayscale(0%) brightness(1);
   opacity: 1;
-  transform: scale(1.05);
+  transform: scale(1.08);
+}
+
+@media (max-width: 768px) {
+  .logos-grid {
+    gap: 2rem;
+  }
+
+  .logos-grid img {
+    height: 32px;
+    width: 100px;
+  }
 }

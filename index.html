@@ -15,11 +15,19 @@
     <nav id="navbar">
         <div class="nav-inner">
             <a href="#" class="logo">Attrakt</a>
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
                 <a href="#philosophy">Philosophy</a>
                 <a href="#intelligence">Intelligence</a>
                 <a href="#services">Services</a>
                 <a href="#contact">Contact Us</a>
+            </div>
+            <div class="nav-right">
+                <a href="#contact" class="nav-cta">Get Started</a>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
     </nav>
@@ -32,9 +40,13 @@
             <h1>Turn your top 1%<br>into your <em>growth engine</em></h1>
             <p class="hero-desc">We deliver premium developer experiences that transform your most engaged users into advocates. Intelligence-driven services that unlock organic growth for technology companies.</p>
             <div class="hero-ctas">
-                <a href="#contact" class="btn btn-primary">Start a conversation →</a>
+                <a href="#contact" class="btn btn-primary">Start a conversation</a>
                 <a href="#philosophy" class="btn btn-secondary">Our approach</a>
             </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll-line"></div>
         </div>
     </section>
 
@@ -435,9 +447,24 @@
                 </ul>
                 <p class="reveal">Whether you're a developer platform, open-source project, blockchain protocol, or any technology company looking to grow through developer advocacy—we'd love to hear from you.</p>
                 <div class="contact-details reveal">
-                    <div class="contact-detail"><div class="contact-detail-icon">✉️</div><div><p class="contact-detail-text">Email us at</p><p class="contact-detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1b9b4bdbdbe91b0a5a5a3b0baa5ffb8be">[email&#160;protected]</a></p></div></div>
-                    <div class="contact-detail"><div class="contact-detail-icon">📍</div><div><p class="contact-detail-text">Visit us at</p><p class="contact-detail-value">Cursor Cafe, Madrid</p></div></div>
-                    <div class="contact-detail"><div class="contact-detail-icon">🐦</div><div><p class="contact-detail-text">Follow us</p><p class="contact-detail-value">@AttraktHQ</p></div></div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </div>
+                        <div><p class="contact-detail-text">Email us at</p><p class="contact-detail-value"><a href="mailto:hello@attrakt.io">hello@attrakt.io</a></p></div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div><p class="contact-detail-text">Visit us at</p><p class="contact-detail-value">Cursor Cafe, Madrid</p></div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                        </div>
+                        <div><p class="contact-detail-text">Follow us</p><p class="contact-detail-value"><a href="https://twitter.com/AttraktHQ" target="_blank" rel="noopener">@AttraktHQ</a></p></div>
+                    </div>
                 </div>
             </div>
             <div class="contact-form-wrap">
@@ -476,7 +503,7 @@
                 <a href="#services">Services</a>
                 <a href="#contact">Contact Us</a>
             </div>
-            <span class="footer-copy">© 2025 Attrakt. All rights reserved.</span>
+            <span class="footer-copy">© 2026 Attrakt. All rights reserved.</span>
         </div>
     </footer>
 
