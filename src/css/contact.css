@@ -21,7 +21,7 @@
   border-right: 1px solid var(--border);
 }
 
-.contact-info h2 {
+.contact-info h1 {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2rem, 3vw, 2.75rem);
   margin-bottom: 1rem;
