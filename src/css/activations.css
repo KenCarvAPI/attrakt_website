@@ -1,71 +1,265 @@
-.activations-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  margin-top: 3rem;
+.activations {
+  max-width: none;
+  width: 100%;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
 }
 
-.activation-card {
-  padding: 2rem;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  transition: all 0.4s var(--ease);
+.activations::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.2), transparent);
+}
+
+.activations-hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 8rem 2rem 4rem;
+  text-align: center;
+}
+
+.activations-eyebrow {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--primary);
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+}
+
+.activations-eyebrow::before,
+.activations-eyebrow::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 1px;
+  background: rgba(201, 162, 39, 0.3);
+}
+
+.activations-eyebrow::before { right: calc(100% + 16px); }
+.activations-eyebrow::after { left: calc(100% + 16px); }
+
+.activations-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+
+.activations-headline em {
+  font-style: italic;
+  color: var(--primary);
+}
+
+.activations-lead {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-weight: 300;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.activations-mosaic {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 2rem;
 }
 
-.activation-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(201, 162, 39, 0.3);
-  box-shadow: var(--shadow-glow);
+.activations-mosaic-feature {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  min-height: 420px;
+  transition: border-color 0.5s var(--ease);
 }
 
-.activation-icon {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  border-radius: 12px;
+.activations-mosaic-feature:hover {
+  border-color: rgba(201, 162, 39, 0.15);
+}
+
+.activations-mosaic-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.activations-mosaic-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 8s var(--ease-out);
+}
+
+.activations-mosaic-feature:hover .activations-mosaic-img img,
+.activations-mosaic-item:hover .activations-mosaic-img img {
+  transform: scale(1.05);
+}
+
+.activations-mosaic-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(5, 5, 5, 0.3), rgba(5, 5, 5, 0.1));
+  pointer-events: none;
+}
+
+.activations-mosaic-body {
+  padding: 3rem;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  margin-bottom: 0.5rem;
 }
 
-.activation-icon svg {
-  stroke: var(--bg);
-}
-
-.activation-card h3 {
-  font-size: 1.15rem;
-  font-weight: 500;
-}
-
-.activation-card p {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-  flex: 1;
-}
-
-.activation-tag {
-  display: inline-flex;
-  align-self: flex-start;
-  padding: 0.4rem 1rem;
-  border: 1px solid rgba(201, 162, 39, 0.3);
-  border-radius: var(--radius-full);
-  font-size: 0.7rem;
+.activations-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.85rem;
   color: var(--primary);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-top: 0.5rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  opacity: 0.7;
 }
 
-@media (max-width: 1024px) {
-  .activations-grid { grid-template-columns: repeat(2, 1fr); }
+.activations-mosaic-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.activations-mosaic-body p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+.activations-mosaic-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.activations-mosaic-item {
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  transition: border-color 0.5s var(--ease);
+}
+
+.activations-mosaic-item:hover {
+  border-color: rgba(201, 162, 39, 0.15);
+}
+
+.activations-mosaic-img-sm {
+  height: 220px;
+}
+
+.activations-mosaic-img-sm img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.activations-mosaic-row .activations-mosaic-body {
+  padding: 2rem 2.5rem 2.5rem;
+}
+
+.activations-mosaic-wide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 300px;
+}
+
+.activations-mosaic-wide .activations-mosaic-body {
+  padding: 3rem;
+}
+
+.activations-mosaic-img-wide {
+  height: 100%;
+}
+
+.activations-mosaic-img-wide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.activations-coda {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 5rem 2rem 8rem;
+  text-align: center;
+}
+
+.activations-coda p {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+}
+
+@media (max-width: 900px) {
+  .activations-mosaic-feature {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .activations-mosaic-feature .activations-mosaic-img {
+    height: 260px;
+  }
+
+  .activations-mosaic-row {
+    grid-template-columns: 1fr;
+  }
+
+  .activations-mosaic-wide {
+    grid-template-columns: 1fr;
+  }
+
+  .activations-mosaic-wide .activations-mosaic-img-wide {
+    height: 220px;
+    order: -1;
+  }
 }
 
 @media (max-width: 600px) {
-  .activations-grid { grid-template-columns: 1fr; }
+  .activations-hero {
+    padding: 5rem 1.5rem 3rem;
+  }
+
+  .activations-mosaic {
+    padding: 0 1.5rem;
+  }
+
+  .activations-mosaic-body {
+    padding: 2rem;
+  }
+
+  .activations-mosaic-img-sm {
+    height: 180px;
+  }
+
+  .activations-coda {
+    padding: 3rem 1.5rem 5rem;
+  }
 }
