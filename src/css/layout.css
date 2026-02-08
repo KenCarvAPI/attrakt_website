@@ -1,6 +1,6 @@
 section {
-  padding: 8rem 2rem;
-  max-width: 1400px;
+  padding: 8rem 3rem;
+  max-width: calc(1400px + 6rem);
   margin: 0 auto;
 }
 
