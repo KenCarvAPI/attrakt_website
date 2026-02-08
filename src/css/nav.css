@@ -28,12 +28,8 @@ nav.scrolled {
 .logo {
   font-family: 'Playfair Display', serif;
   font-size: 1.5rem;
-  color: var(--text);
+  color: #ffffff;
   text-decoration: none;
-  background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   transition: opacity 0.3s;
 }
 
