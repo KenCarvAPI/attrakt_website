@@ -1,0 +1,71 @@
+.activations-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.activation-card {
+  padding: 2rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: all 0.4s var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.activation-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(201, 162, 39, 0.3);
+  box-shadow: var(--shadow-glow);
+}
+
+.activation-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.activation-icon svg {
+  stroke: var(--bg);
+}
+
+.activation-card h3 {
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.activation-card p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.activation-tag {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(201, 162, 39, 0.3);
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 1024px) {
+  .activations-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .activations-grid { grid-template-columns: 1fr; }
+}
