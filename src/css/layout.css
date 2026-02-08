@@ -25,6 +25,14 @@ section {
   background-clip: text;
 }
 
+.section-title em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .section-desc {
   font-size: 1.1rem;
   color: var(--text-muted);

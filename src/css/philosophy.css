@@ -13,15 +13,8 @@
   align-items: center;
 }
 
-.philosophy h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+.philosophy .section-title {
   margin-bottom: 1.5rem;
-}
-
-.philosophy h2 em {
-  font-style: italic;
-  color: var(--primary);
 }
 
 .philosophy .reveal > p {
