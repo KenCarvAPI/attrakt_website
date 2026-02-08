@@ -1,9 +1,3 @@
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
-
 export function initContactForm() {
   const form = document.getElementById('contactForm');
   if (!form) return;
@@ -22,27 +16,33 @@ export function initContactForm() {
       email: inputs[2]?.value || '',
       company: inputs[3]?.value || '',
       service_interest: inputs[4]?.value || '',
-      message: inputs[5]?.value || '',
+      goals: inputs[5]?.value || '',
     };
 
-    const { error } = await supabase
-      .from('contact_submissions')
-      .insert([data]);
+    try {
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/contact-submit`;
+      const res = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-    if (error) {
+      const result = await res.json();
+
+      if (!res.ok || !result.success) {
+        throw new Error(result.error || 'Submission failed');
+      }
+
+      btn.textContent = 'Message sent!';
+      btn.style.background = 'var(--secondary)';
+      form.reset();
+    } catch {
       btn.textContent = 'Something went wrong';
       btn.style.background = '#cc3333';
-      setTimeout(() => {
-        btn.textContent = originalText;
-        btn.style.background = '';
-        btn.disabled = false;
-      }, 3000);
-      return;
     }
-
-    btn.textContent = 'Message sent!';
-    btn.style.background = 'var(--secondary)';
-    form.reset();
 
     setTimeout(() => {
       btn.textContent = originalText;
