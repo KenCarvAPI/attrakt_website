@@ -4,6 +4,15 @@
   width: 100%;
 }
 
+.philosophy-header {
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+}
+
+.philosophy .section-title {
+  margin-bottom: 0;
+}
+
 .philosophy-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -11,18 +20,6 @@
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
   align-items: center;
-}
-
-.philosophy .section-title {
-  margin-bottom: 1.5rem;
-}
-
-.philosophy .reveal > p {
-  color: var(--text-muted);
-  font-size: 1.1rem;
-  margin-bottom: 2.5rem;
-  font-weight: 300;
-  line-height: 1.8;
 }
 
 .philosophy-points {
@@ -33,8 +30,9 @@
 
 .philosophy-point {
   display: flex;
-  gap: 1rem;
-  padding: 1.25rem;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.5rem;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -48,19 +46,29 @@
 }
 
 .philosophy-point-num {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--primary);
   font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: var(--primary);
+  background: transparent;
 }
 
 .philosophy-point h4 {
-  font-size: 1rem;
-  margin-bottom: 0.25rem;
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
 }
 
 .philosophy-point p {
   font-size: 0.875rem;
   color: var(--text-muted);
+  line-height: 1.6;
 }
 
 /* Flywheel */
@@ -76,29 +84,29 @@
 .flywheel {
   position: relative;
   width: 100%;
-  max-width: 550px;
+  max-width: 450px;
   aspect-ratio: 1;
 }
 
 .flywheel-ring-outer {
   position: absolute;
-  inset: 60px;
+  inset: 20px;
   border-radius: 50%;
-  border: 2px solid rgba(201, 162, 39, 0.3);
+  border: 1px dashed rgba(201, 162, 39, 0.25);
   animation: flywheel-rotate 40s linear infinite;
 }
 
 .flywheel-ring-inner {
   position: absolute;
-  inset: 100px;
+  inset: 60px;
   border-radius: 50%;
-  border: 1px dashed rgba(201, 162, 39, 0.15);
+  border: 2px solid rgba(201, 162, 39, 0.4);
   animation: flywheel-rotate 35s linear infinite reverse;
 }
 
 .flywheel-ring-glow {
   position: absolute;
-  inset: 80px;
+  inset: 40px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(201, 162, 39, 0.08) 0%, transparent 70%);
   animation: glow-pulse 4s ease-in-out infinite;
@@ -118,8 +126,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   background: radial-gradient(circle at 30% 30%, var(--bg-card), var(--bg));
   border: 2px solid var(--border);
   border-radius: 50%;
@@ -140,91 +148,14 @@
   animation: flywheel-rotate 20s linear infinite;
 }
 
-.flywheel-center-icon {
-  font-size: 2rem;
-  margin-bottom: 0.25rem;
-  animation: icon-pulse 3s ease-in-out infinite;
-}
-
 .flywheel-center-text {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--primary);
-  font-weight: 600;
-}
-
-@keyframes icon-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.06); }
-}
-
-.flywheel-stage {
-  position: absolute;
-  width: 160px;
-  padding: 1.25rem;
-  background: var(--bg-card);
-  border: 2px solid var(--border);
-  border-radius: var(--radius-md);
-  text-align: center;
-  transition: border-color 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out), transform 0.6s var(--ease-out);
-  z-index: 5;
-}
-
-.flywheel-stage:hover {
-  z-index: 20;
-  transform: scale(1.03);
-  box-shadow: 0 0 40px rgba(201, 162, 39, 0.15);
-}
-
-.flywheel-stage-1 {
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-color: var(--primary);
-  box-shadow: 0 0 30px rgba(201, 162, 39, 0.2);
-}
-
-.flywheel-stage-2 {
-  bottom: 70px;
-  right: -20px;
-  border-color: var(--primary);
-  box-shadow: 0 0 30px rgba(201, 162, 39, 0.2);
-}
-
-.flywheel-stage-3 {
-  bottom: 70px;
-  left: -20px;
-  border-color: var(--primary);
-  box-shadow: 0 0 30px rgba(201, 162, 39, 0.2);
-}
-
-.flywheel-stage-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
   font-family: 'Playfair Display', serif;
-  font-size: 1.25rem;
-  font-weight: 500;
-  margin-bottom: 0.75rem;
-  background: rgba(201, 162, 39, 0.2);
-  color: var(--primary);
-}
-
-.flywheel-stage-title {
   font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text);
-}
-
-.flywheel-stage-desc {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  line-height: 1.5;
+  text-align: center;
+  line-height: 1.3;
+  color: var(--primary);
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 /* Arrows */
@@ -360,26 +291,12 @@
   }
 
   .flywheel-container {
-    min-height: 450px;
-    margin-top: 3rem;
+    min-height: 400px;
   }
 
   .flywheel {
-    max-width: 480px;
+    max-width: 380px;
     margin: 0 auto;
-  }
-
-  .flywheel-stage {
-    width: 140px;
-    padding: 1rem;
-  }
-
-  .flywheel-stage-title {
-    font-size: 0.9rem;
-  }
-
-  .flywheel-stage-desc {
-    font-size: 0.7rem;
   }
 }
 
@@ -390,29 +307,16 @@
   }
 
   .flywheel-container {
-    min-height: 420px;
+    min-height: 350px;
   }
 
   .flywheel {
-    max-width: 360px;
+    max-width: 300px;
   }
 
-  .flywheel-ring-outer { inset: 50px; }
-  .flywheel-ring-inner { inset: 80px; }
-  .flywheel-ring-glow { inset: 65px; }
-
-  .flywheel-stage {
-    width: 120px;
-    padding: 0.875rem;
-  }
-
-  .flywheel-stage-1 { top: -5px; }
-  .flywheel-stage-2 { bottom: 55px; right: -15px; }
-  .flywheel-stage-3 { bottom: 55px; left: -15px; }
-  .flywheel-stage-num { width: 30px; height: 30px; font-size: 1rem; margin-bottom: 0.5rem; }
-  .flywheel-stage-title { font-size: 0.85rem; }
-  .flywheel-stage-desc { font-size: 0.65rem; }
-  .flywheel-center { width: 100px; height: 100px; }
-  .flywheel-center-icon { font-size: 1.5rem; }
-  .flywheel-center-text { font-size: 0.6rem; }
+  .flywheel-ring-outer { inset: 15px; }
+  .flywheel-ring-inner { inset: 45px; }
+  .flywheel-ring-glow { inset: 30px; }
+  .flywheel-center { width: 110px; height: 110px; }
+  .flywheel-center-text { font-size: 0.85rem; }
 }
