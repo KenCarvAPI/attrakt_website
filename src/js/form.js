@@ -1,3 +1,53 @@
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
+
+export function initTrendsReportForm() {
+  const form = document.getElementById('trendsReportForm');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    const input = form.querySelector('input[type="email"]');
+    const originalText = btn.textContent;
+
+    btn.textContent = 'Subscribing...';
+    btn.disabled = true;
+
+    try {
+      const { error } = await supabase
+        .from('newsletter_subscribers')
+        .insert({ email: input.value, source: 'trends_report' });
+
+      if (error) {
+        if (error.code === '23505') {
+          btn.textContent = 'Already subscribed!';
+          btn.style.background = 'var(--secondary)';
+        } else {
+          throw error;
+        }
+      } else {
+        btn.textContent = 'Subscribed!';
+        btn.style.background = 'var(--accent)';
+        input.value = '';
+      }
+    } catch {
+      btn.textContent = 'Something went wrong';
+      btn.style.background = '#cc3333';
+    }
+
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 3000);
+  });
+}
+
 export function initContactForm() {
   const form = document.getElementById('contactForm');
   if (!form) return;
