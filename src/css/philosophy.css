@@ -1,7 +1,9 @@
 .philosophy {
-  background: var(--bg-elevated);
+  background: rgba(10, 10, 10, 0.5);
   max-width: none;
   width: 100%;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .philosophy-inner {
@@ -35,10 +37,12 @@
   display: flex;
   gap: 1rem;
   padding: 1.25rem;
-  background: var(--bg);
-  border: 1px solid var(--border);
+  background: rgba(5, 5, 5, 0.6);
+  border: 1px solid var(--glass-border);
   border-radius: 12px;
   transition: transform 0.6s var(--ease-out), border-color 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .philosophy-point:hover {
@@ -163,12 +167,14 @@
   position: absolute;
   width: 160px;
   padding: 1.25rem;
-  background: var(--bg-card);
-  border: 2px solid var(--border);
+  background: rgba(17, 17, 17, 0.6);
+  border: 2px solid var(--glass-border);
   border-radius: var(--radius-md);
   text-align: center;
   transition: border-color 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out), transform 0.6s var(--ease-out);
   z-index: 5;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .flywheel-stage:hover {

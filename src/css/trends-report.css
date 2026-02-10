@@ -4,8 +4,10 @@
   justify-content: space-between;
   gap: 2rem;
   padding: 2rem 3rem;
-  background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(201, 162, 39, 0.02) 100%);
-  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.06) 0%, rgba(201, 162, 39, 0.015) 100%);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .trends-report-cta-content h3 {

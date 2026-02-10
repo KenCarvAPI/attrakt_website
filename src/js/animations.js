@@ -27,7 +27,8 @@ export function initRevealAnimations() {
 
 export function initParallaxOrbs() {
   const orbs = document.querySelectorAll('.hero-orb');
-  if (!orbs.length) return;
+  const meshContainer = document.querySelector('.bg-mesh');
+  if (!orbs.length && !meshContainer) return;
 
   let targetX = 0;
   let targetY = 0;
@@ -47,6 +48,10 @@ export function initParallaxOrbs() {
       const factor = (i + 1) * 6;
       orb.style.transform = `translate(${currentX * factor}px, ${currentY * factor}px)`;
     });
+
+    if (meshContainer) {
+      meshContainer.style.transform = `translate(${currentX * 8}px, ${currentY * 8}px)`;
+    }
 
     requestAnimationFrame(animate);
   }

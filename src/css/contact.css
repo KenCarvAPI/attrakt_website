@@ -1,8 +1,10 @@
 .contact {
-  background: var(--bg-elevated);
+  background: rgba(10, 10, 10, 0.5);
   max-width: none;
   width: 100%;
   padding: 0;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .contact-inner {
@@ -51,11 +53,13 @@
   color: var(--text-muted);
   font-size: 0.95rem;
   padding: 0.75rem 1rem;
-  background: var(--bg);
-  border: 1px solid var(--border);
+  background: rgba(5, 5, 5, 0.5);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-sm);
   transition: all 0.3s var(--ease);
   line-height: 1.5;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .contact-summary li:hover {
@@ -154,13 +158,15 @@
 .form-group select,
 .form-group textarea {
   padding: 1rem;
-  background: var(--bg);
-  border: 1px solid var(--border);
+  background: rgba(5, 5, 5, 0.5);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-sm);
   color: var(--text);
   font-family: 'Outfit', sans-serif;
   font-size: 1rem;
   transition: border-color 0.3s, box-shadow 0.3s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .form-group input:focus,

@@ -11,11 +11,13 @@
 
 .process-step {
   padding: 2rem;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 12px;
   position: relative;
   transition: transform 0.6s var(--ease-out), border-color 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .process-step:nth-child(1) { border-top: 2px solid var(--primary); }
@@ -120,13 +122,15 @@
 
 .service-card {
   padding: 2.5rem;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: 20px;
   transition: transform 0.7s var(--ease-out), border-color 0.7s var(--ease-out), box-shadow 0.7s var(--ease-out);
   position: relative;
   overflow: hidden;
   z-index: 1;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .service-card::before {

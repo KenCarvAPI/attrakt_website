@@ -1,7 +1,9 @@
 .intelligence {
-  background: var(--bg-elevated);
+  background: rgba(10, 10, 10, 0.5);
   max-width: none;
   width: 100%;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .intelligence-container {
@@ -31,12 +33,14 @@
 }
 
 .data-source {
-  background: var(--bg);
-  border: 1px solid var(--border);
+  background: rgba(5, 5, 5, 0.6);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   padding: 1.75rem;
   transition: transform 0.6s var(--ease-out), border-color 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
   position: relative;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .data-source:hover {
@@ -295,12 +299,14 @@
 }
 
 .data-output {
-  background: var(--bg);
-  border: 1px solid var(--border);
+  background: rgba(5, 5, 5, 0.6);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   padding: 1.5rem;
   transition: transform 0.6s var(--ease-out), border-color 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
   text-align: center;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .data-output:hover {

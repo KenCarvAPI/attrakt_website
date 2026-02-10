@@ -2,6 +2,8 @@ section {
   padding: 8rem 3rem;
   max-width: calc(1400px + 6rem);
   margin: 0 auto;
+  position: relative;
+  z-index: 3;
 }
 
 .section-label {

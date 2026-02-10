@@ -96,10 +96,12 @@
   gap: 0;
   border-radius: 16px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--glass-border);
   min-height: 440px;
   transition: border-color 0.8s var(--ease-out), box-shadow 0.8s var(--ease-out);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .activations-mosaic-feature:hover {
@@ -209,9 +211,11 @@
 .activations-mosaic-item {
   border-radius: 16px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--glass-border);
   transition: border-color 0.8s var(--ease-out), box-shadow 0.8s var(--ease-out);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .activations-mosaic-item:hover {
