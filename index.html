@@ -448,14 +448,56 @@
         </div>
     </section>
 
-    <section class="contact" id="contact">
-        <div class="trends-report-cta reveal" id="trends-report">
-            <div class="trends-report-cta-content">
-                <h3>Weekly Insights & Trends Report</h3>
-                <p>Strategic insights on developer marketing, community activation and ecosystem growth from industry. Delivered to your inbox once a week.</p>
-            </div>
-            <a href="#contact" class="trends-report-cta-btn">Recieve Weekly Report</a>
+<section class="contact" id="contact">
+    <div class="trends-report-cta reveal" id="trends-report">
+        <div class="trends-report-cta-content">
+            <h3>Weekly Insights & Trends Report</h3>
+            <p>Strategic insights on developer marketing, community activation and ecosystem growth from industry. Delivered to your inbox once a week.</p>
         </div>
+        <form id="attrakt-form" onsubmit="return handleAttraktSubscribe(event)" style="display: flex; gap: 8px; width: 100%; max-width: 480px;">
+            <input type="email" name="email" placeholder="you@company.com" required style="flex: 1; padding: 12px 16px; border: 1px solid rgba(201,168,76,0.3); border-radius: 6px; font-size: 14px; color: #fff; background: rgba(255,255,255,0.08); outline: none;" onfocus="this.style.borderColor='#C9A84C'" onblur="this.style.borderColor='rgba(201,168,76,0.3)'" />
+            <button type="submit" class="trends-report-cta-btn" style="white-space: nowrap;">Receive Weekly Report</button>
+        </form>
+        <p id="attrakt-status" style="margin: 10px 0 0; font-size: 13px; min-height: 20px; color: #C9A84C;"></p>
+    </div>
+</section>
+
+<script>
+async function handleAttraktSubscribe(e) {
+    e.preventDefault();
+    const form = document.getElementById("attrakt-form");
+    const status = document.getElementById("attrakt-status");
+    const btn = form.querySelector("button[type=submit]");
+
+    btn.disabled = true;
+    btn.textContent = "...";
+    status.textContent = "";
+
+    try {
+        const res = await fetch("https://attrakt-trends-agent.onrender.com/api/subscribe", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: form.email.value }),
+        });
+
+        const result = await res.json();
+
+        if (res.ok) {
+            status.textContent = "You're in. Your first briefing arrives this Sunday.";
+            form.reset();
+        } else {
+            status.textContent = result.error || "Something went wrong.";
+            status.style.color = "#c0392b";
+        }
+    } catch (err) {
+        status.textContent = "Network error. Please try again.";
+        status.style.color = "#c0392b";
+    }
+
+    btn.disabled = false;
+    btn.textContent = "Receive Weekly Report";
+}
+</script>
         <div class="contact-inner">
             <div class="contact-info">
                 <h1 class="reveal">Let's build something together</h1>
