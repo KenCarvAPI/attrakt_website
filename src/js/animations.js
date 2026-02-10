@@ -3,6 +3,8 @@ export function initLoader() {
     setTimeout(() => {
       const loader = document.getElementById('loader');
       if (loader) loader.classList.add('hidden');
+      document.body.classList.remove('loading');
+      document.body.classList.add('loaded');
     }, 1600);
   });
 }
