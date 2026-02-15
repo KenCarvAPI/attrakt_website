@@ -1,0 +1,56 @@
+.logos {
+  padding: 4rem 2rem;
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+  background: rgba(5, 5, 5, 0.2);
+  width: 100%;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.logos-label {
+  text-align: center;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--text-dim);
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+
+.logos-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3.5rem;
+  flex-wrap: nowrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.logos-grid img {
+  height: 40px;
+  width: 120px;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(2);
+  transition: filter 0.8s var(--ease-out), opacity 0.8s var(--ease-out);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.logos-grid img:hover {
+  filter: grayscale(0%) brightness(1);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .logos-grid {
+    gap: 2rem;
+  }
+
+  .logos-grid img {
+    height: 32px;
+    width: 100px;
+  }
+}

@@ -1,0 +1,37 @@
+:root {
+  --bg: #050505;
+  --bg-elevated: #0a0a0a;
+  --bg-card: #111;
+  --text: #fff;
+  --text-muted: #888;
+  --text-dim: #444;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --primary: #c9a227;
+  --primary-light: #e8c547;
+  --primary-glow: rgba(201, 162, 39, 0.5);
+  --primary-subtle: rgba(201, 162, 39, 0.1);
+  --secondary: #0066ff;
+  --secondary-glow: rgba(0, 102, 255, 0.3);
+  --accent: #00d4aa;
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.15, 1);
+  --ease-gentle: cubic-bezier(0.4, 0, 0, 1);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 40px rgba(201, 162, 39, 0.15);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 100px;
+
+  --glass-bg: rgba(10, 10, 10, 0.55);
+  --glass-bg-subtle: rgba(10, 10, 10, 0.35);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 255, 255, 0.14);
+  --glass-blur: 24px;
+  --glass-highlight: rgba(255, 255, 255, 0.04);
+  --mesh-opacity: 0.45;
+}

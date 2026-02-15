@@ -4,1138 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attrakt — Premium Developer Experience & Ecosystem Growth</title>
+    <style>
+        body.loading > *:not(.loader):not(.bg-mesh):not(.bg-glossy-sheen) { opacity: 0 !important; visibility: hidden !important; }
+        .loader { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; background: #0a0a0a; }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #050505;
-            --bg-elevated: #0a0a0a;
-            --bg-card: #111;
-            --text: #fff;
-            --text-muted: #888;
-            --text-dim: #444;
-            --border: rgba(255,255,255,0.06);
-            --primary: #c9a227;
-            --primary-light: #e8c547;
-            --secondary: #0066ff;
-            --accent: #00d4aa;
-            --ease: cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Loader */
-        .loader {
-            position: fixed; inset: 0; background: var(--bg); z-index: 10000;
-            display: flex; align-items: center; justify-content: center;
-            transition: opacity 0.6s, visibility 0.6s;
-        }
-        .loader.hidden { opacity: 0; visibility: hidden; }
-        .loader-logo { font-family: 'Playfair Display', serif; font-size: 2rem; animation: fadeIn 1s ease; background: linear-gradient(135deg, var(--text) 0%, var(--premium) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Nav */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            padding: 1.25rem 3rem;
-            background: transparent;
-            transition: background 0.4s, backdrop-filter 0.4s;
-        }
-        nav.scrolled { background: rgba(5,5,5,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
-        .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--text); text-decoration: none; background: linear-gradient(135deg, var(--text) 0%, var(--premium) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .nav-links { display: flex; gap: 2.5rem; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-cta {
-            padding: 0.65rem 1.5rem; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: var(--bg);
-            text-decoration: none; font-size: 0.875rem; font-weight: 500; border-radius: 100px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .nav-cta:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(201,162,39,0.5); }
-
-        /* Hero */
-        .hero {
-            min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            padding: 8rem 2rem 4rem; text-align: center; position: relative;
-            width: 100%;
-        }
-        .hero-orb {
-            position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.4;
-            animation: float 20s ease-in-out infinite;
-            pointer-events: none;
-        }
-        .hero-orb-1 { width: 60vw; min-width: 400px; max-width: 800px; height: 60vw; min-height: 400px; max-height: 800px; background: rgba(201,162,39,0.4); top: -20%; right: 0; animation: float-1 20s ease-in-out infinite; }
-        .hero-orb-2 { width: 50vw; min-width: 350px; max-width: 700px; height: 50vw; min-height: 350px; max-height: 700px; background: rgba(201,162,39,0.3); bottom: -10%; left: 0; animation: float-2 20s ease-in-out infinite; animation-delay: -7s; }
-        .hero-orb-3 { width: 30vw; min-width: 200px; max-width: 400px; height: 30vw; min-height: 200px; max-height: 400px; background: rgba(0,102,255,0.25); top: 40%; left: 15%; animation: float-3 20s ease-in-out infinite; animation-delay: -14s; }
-        @keyframes float {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.5; }
-        }
-        @keyframes float-1 {
-            0%, 100% { transform: translateX(30%) translate(0,0); }
-            50% { transform: translateX(30%) translate(-20px, 20px); }
-        }
-        @keyframes float-2 {
-            0%, 100% { transform: translateX(-30%) translate(0,0); }
-            50% { transform: translateX(-30%) translate(20px, -20px); }
-        }
-        @keyframes float-3 {
-            0%, 100% { transform: translate(0,0); }
-            50% { transform: translate(15px, -15px); }
-        }
-        .hero-content { max-width: 1000px; position: relative; z-index: 1; padding: 0 2rem; }
-        .hero-badge {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.5rem 1rem; background: rgba(201,162,39,0.1); border: 1px solid rgba(201,162,39,0.3);
-            border-radius: 100px; font-size: 0.85rem; color: var(--primary); margin-bottom: 2rem;
-        }
-        .hero-badge-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; animation: pulse 2s infinite; }
-        .hero h1 {
-            font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 7vw, 5.5rem);
-            font-weight: 400; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1.5rem;
-        }
-        .hero h1 em { font-style: italic; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, #f5d76e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding-bottom: 0.1em; padding-left: 0.1em; display: inline-block; }
-        .hero-desc { font-size: 1.2rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 2.5rem; font-weight: 300; }
-        .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-        .btn {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 1rem 2rem; font-size: 0.95rem; font-weight: 500; border-radius: 100px;
-            text-decoration: none; transition: all 0.3s var(--ease); border: none; cursor: pointer;
-        }
-        .btn-primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: var(--bg); font-weight: 600; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(201,162,39,0.5); }
-        .btn-secondary { background: transparent; color: var(--text); border: 1px solid rgba(0,102,255,0.4); }
-        .btn-secondary:hover { background: rgba(0,102,255,0.1); border-color: var(--secondary); }
-
-        /* Logos */
-        .logos { padding: 4rem 2rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: transparent; width: 100%; }
-        .logos-label { text-align: center; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-dim); margin-bottom: 2rem; }
-        .logos-grid { display: flex; justify-content: center; align-items: center; gap: 3rem; flex-wrap: wrap; opacity: 0.7; }
-        .logos-grid img { height: 40px; width: 120px; object-fit: contain; filter: grayscale(100%) brightness(1.5); transition: filter 0.3s, opacity 0.3s; opacity: 0.8; }
-        .logos-grid img:hover { filter: grayscale(0%) brightness(1); opacity: 1; }
-
-        /* Sections */
-        section { padding: 8rem 2rem; max-width: 1400px; margin: 0 auto; }
-        .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--primary); margin-bottom: 1rem; }
-        .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 400; margin-bottom: 1rem; background: linear-gradient(135deg, var(--text) 0%, var(--text) 60%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .section-desc { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; font-weight: 300; }
-
-        /* Philosophy */
-        .philosophy { background: var(--bg-elevated); max-width: none; width: 100%; }
-        .philosophy-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-        .philosophy h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
-        .philosophy h2 em { font-style: italic; color: var(--primary); }
-        .philosophy .reveal > p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 8rem; font-weight: 300; line-height: 1.8; }
-        .philosophy-points { display: flex; flex-direction: column; gap: 1rem; }
-        .philosophy-point {
-            display: flex; gap: 1rem; padding: 1.25rem; background: var(--bg); border: 1px solid var(--border);
-            border-radius: 12px; transition: all 0.3s var(--ease);
-        }
-        .philosophy-point:hover { transform: translateX(8px); border-color: var(--primary); }
-        .philosophy-point-num { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--primary); }
-        .philosophy-point h4 { font-size: 1rem; margin-bottom: 0.25rem; }
-        .philosophy-point p { font-size: 0.875rem; color: var(--text-muted); }
-        /* Flywheel - Large, prominent 3-step visualization */
-        .flywheel-container {
-            width: 100%;
-            min-height: 500px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .flywheel {
-            position: relative;
-            width: 100%;
-            max-width: 550px;
-            aspect-ratio: 1;
-        }
-        
-        /* Central rotating ring */
-        .flywheel-ring-outer {
-            position: absolute;
-            inset: 60px;
-            border-radius: 50%;
-            border: 3px solid rgba(201,162,39,0.4);
-            animation: flywheel-rotate 25s linear infinite;
-        }
-        
-        .flywheel-ring-inner {
-            position: absolute;
-            inset: 100px;
-            border-radius: 50%;
-            border: 1px dashed rgba(201,162,39,0.2);
-            animation: flywheel-rotate 20s linear infinite reverse;
-        }
-        
-        .flywheel-ring-glow {
-            position: absolute;
-            inset: 80px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(201,162,39,0.08) 0%, transparent 70%);
-            animation: glow-pulse 4s ease-in-out infinite;
-        }
-        
-        @keyframes flywheel-rotate {
-            to { transform: rotate(360deg); }
-        }
-        
-        @keyframes glow-pulse {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.02); }
-        }
-        
-        /* Center hub */
-        .flywheel-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle at 30% 30%, var(--bg-card), var(--bg));
-            border: 2px solid var(--border);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            box-shadow: 
-                0 0 60px rgba(201,162,39,0.2),
-                inset 0 0 30px rgba(0,0,0,0.3);
-        }
-        
-        .flywheel-center::before {
-            content: '';
-            position: absolute;
-            inset: -6px;
-            border-radius: 50%;
-            border: 2px solid rgba(201,162,39,0.5);
-            animation: flywheel-rotate 10s linear infinite;
-        }
-        
-        .flywheel-center-icon {
-            font-size: 2rem;
-            margin-bottom: 0.25rem;
-            animation: icon-pulse 3s ease-in-out infinite;
-        }
-        
-        .flywheel-center-text {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--primary);
-            font-weight: 600;
-        }
-        
-        @keyframes icon-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-        }
-        
-        /* Stage cards - positioned around the circle */
-        .flywheel-stage {
-            position: absolute;
-            width: 160px;
-            padding: 1.25rem;
-            background: var(--bg-card);
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            text-align: center;
-            transition: all 0.4s var(--ease);
-            z-index: 5;
-        }
-        
-        .flywheel-stage:hover {
-            z-index: 20;
-            box-shadow: 0 0 50px rgba(201,162,39,0.3);
-        }
-        
-        .flywheel-stage-1 {
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(201,162,39,0.2);
-        }
-        
-        .flywheel-stage-2 {
-            bottom: 30px;
-            right: -20px;
-            border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(201,162,39,0.2);
-        }
-        
-        .flywheel-stage-3 {
-            bottom: 30px;
-            left: -20px;
-            border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(201,162,39,0.2);
-        }
-        
-        .flywheel-stage-num {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 0.75rem;
-            background: rgba(201,162,39,0.2);
-            color: var(--primary);
-        }
-        
-        .flywheel-stage-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-        
-        .flywheel-stage-desc {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-        
-        /* Animated arrows between stages */
-        .flywheel-arrows {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-        }
-        
-        .flywheel-arrows svg {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .flywheel-arrow-path {
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            opacity: 0.6;
-        }
-        
-        .flywheel-arrow-path-1 {
-            stroke: var(--primary);
-            stroke-dasharray: 8 6;
-            animation: arrow-flow 2s linear infinite;
-        }
-        
-        .flywheel-arrow-path-2 {
-            stroke: var(--primary);
-            stroke-dasharray: 8 6;
-            animation: arrow-flow 2s linear infinite 0.66s;
-        }
-        
-        .flywheel-arrow-path-3 {
-            stroke: var(--primary);
-            stroke-dasharray: 8 6;
-            animation: arrow-flow 2s linear infinite 1.33s;
-        }
-        
-        @keyframes arrow-flow {
-            to { stroke-dashoffset: -28; }
-        }
-        
-        /* Animated particles */
-        .flywheel-particle {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            filter: blur(1px);
-        }
-        
-        .flywheel-particle-1 {
-            background: var(--primary-light);
-            box-shadow: 0 0 15px var(--primary);
-            animation: particle-1 4s ease-in-out infinite;
-        }
-        
-        .flywheel-particle-2 {
-            background: var(--primary-light);
-            box-shadow: 0 0 15px var(--primary);
-            animation: particle-2 4s ease-in-out infinite 1.33s;
-        }
-        
-        .flywheel-particle-3 {
-            background: var(--primary-light);
-            box-shadow: 0 0 15px var(--primary);
-            animation: particle-3 4s ease-in-out infinite 2.66s;
-        }
-        
-        @keyframes particle-1 {
-            0%, 100% { top: 10%; left: 60%; opacity: 0; transform: scale(0); }
-            10% { opacity: 1; transform: scale(1); }
-            90% { opacity: 1; transform: scale(1); }
-            100% { top: 65%; left: 88%; opacity: 0; transform: scale(0); }
-        }
-        
-        @keyframes particle-2 {
-            0%, 100% { top: 72%; left: 80%; opacity: 0; transform: scale(0); }
-            10% { opacity: 1; transform: scale(1); }
-            90% { opacity: 1; transform: scale(1); }
-            100% { top: 72%; left: 12%; opacity: 0; transform: scale(0); }
-        }
-        
-        @keyframes particle-3 {
-            0%, 100% { top: 65%; left: 5%; opacity: 0; transform: scale(0); }
-            10% { opacity: 1; transform: scale(1); }
-            90% { opacity: 1; transform: scale(1); }
-            100% { top: 10%; left: 35%; opacity: 0; transform: scale(0); }
-        }
-        
-        /* Arrow heads */
-        .flywheel-arrowhead {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-style: solid;
-        }
-        
-        .flywheel-arrowhead-1 {
-            top: 38%;
-            right: 8%;
-            border-width: 6px 0 6px 10px;
-            border-color: transparent transparent transparent var(--primary);
-            animation: arrowhead-pulse 2s ease-in-out infinite;
-        }
-        
-        .flywheel-arrowhead-2 {
-            bottom: 28%;
-            left: 22%;
-            border-width: 6px 10px 6px 0;
-            border-color: transparent var(--primary) transparent transparent;
-            animation: arrowhead-pulse 2s ease-in-out infinite 0.66s;
-        }
-        
-        .flywheel-arrowhead-3 {
-            top: 18%;
-            left: 38%;
-            border-width: 0 6px 10px 6px;
-            border-color: transparent transparent var(--primary) transparent;
-            animation: arrowhead-pulse 2s ease-in-out infinite 1.33s;
-        }
-        
-        @keyframes arrowhead-pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-
-        /* How It Works */
-        .how-it-works {
-            border-bottom: 1px solid var(--border);
-        }
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3.5rem;
-        }
-        .process-step {
-            padding: 2rem;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            position: relative;
-            transition: all 0.4s var(--ease);
-        }
-        .process-step:nth-child(1) { border-top: 2px solid var(--primary); }
-        .process-step:nth-child(2) { border-top: 2px solid var(--primary-light); }
-        .process-step:nth-child(3) { border-top: 2px solid var(--secondary); }
-        .process-step:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-        }
-        .process-step:nth-child(1):hover { border-color: var(--primary); border-top-color: var(--primary); }
-        .process-step:nth-child(2):hover { border-color: var(--primary-light); border-top-color: var(--primary-light); }
-        .process-step:nth-child(3):hover { border-color: var(--secondary); border-top-color: var(--secondary); }
-        .process-num {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            opacity: 0.5;
-            line-height: 1;
-            margin-bottom: 1rem;
-        }
-        .process-step:nth-child(1) .process-num { color: var(--primary); }
-        .process-step:nth-child(2) .process-num { color: var(--primary-light); }
-        .process-step:nth-child(3) .process-num { color: var(--secondary); }
-        .process-step h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-        }
-        .process-step p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* Services */
-        .services-wrapper {
-            position: relative;
-            margin-top: 3rem;
-        }
-        .services-grid { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 2rem;
-            position: relative;
-        }
-        /* Flow connectors between cards */
-        .services-flow {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .services-flow-line {
-            position: absolute;
-            top: 50%;
-            height: 1px;
-            background: transparent;
-            border-top: 2px dashed rgba(201,162,39,0.3);
-        }
-        .services-flow-line-1 {
-            left: calc(33.33% - 1rem);
-            width: calc(33.33% / 2 - 1rem);
-        }
-        .services-flow-line-2 {
-            left: calc(50% + 1rem);
-            width: calc(33.33% / 2 - 1rem);
-        }
-        .services-flow-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 5px 0 5px 8px;
-            border-color: transparent transparent transparent var(--primary);
-            opacity: 0.6;
-            animation: arrow-pulse 2s ease-in-out infinite;
-        }
-        .services-flow-arrow-1 { left: calc(50% - 2rem); }
-        .services-flow-arrow-2 { left: calc(83.33% - 3rem); }
-        @keyframes arrow-pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.8; }
-        }
-        .service-card {
-            padding: 2.5rem; background: var(--bg-elevated); border: 1px solid var(--border);
-            border-radius: 20px; transition: all 0.4s var(--ease); position: relative; overflow: hidden;
-            z-index: 1;
-        }
-        .service-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--primary-light)); opacity: 0; transition: opacity 0.4s;
-        }
-        .service-card:hover { transform: translateY(-8px); border-color: rgba(201,162,39,0.3); }
-        .service-card:hover::before { opacity: 1; }
-        .service-card h3 { 
-            font-size: 1.5rem; 
-            margin-bottom: 0.5rem; 
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-        }
-        .service-card .service-subtitle {
-            color: var(--primary);
-            font-size: 0.85rem;
-            font-weight: 400;
-            margin-bottom: 1.5rem;
-            font-style: italic;
-        }
-        .service-features { display: flex; flex-direction: column; gap: 0.5rem; }
-        .service-feature { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #ccc; }
-        .service-feature::before { content: '✓'; color: var(--primary); font-weight: 600; }
-        /* Intelligence badge */
-        .service-intelligence {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-        }
-        .service-intelligence-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: status-blink 2s ease-in-out infinite;
-        }
-        .service-intelligence span {
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        @media (max-width: 900px) {
-            .services-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .services-flow { display: none; }
-        }
-
-        /* Intelligence */
-        .intelligence { background: var(--bg-elevated); max-width: none; width: 100%; }
-        .intelligence-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; }
-        .intelligence-badge {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.4rem 1rem; background: rgba(201,162,39,0.1); border: 1px solid rgba(201,162,39,0.3);
-            border-radius: 100px; font-size: 0.8rem; color: var(--primary); margin-bottom: 1.5rem;
-        }
-        .intelligence h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3vw, 2.5rem); margin-bottom: 1rem; }
-        .intelligence > div > p { color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem; font-weight: 300; }
-        /* Ecosystem Visualization - Clean 2x2 Grid with Central Hub */
-        .ecosystem-wrapper {
-            position: relative;
-            max-width: 800px;
-            margin: 3rem auto 0;
-            padding: 2rem;
-        }
-        
-        .ecosystem-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem 4rem;
-        }
-        
-        /* Central hub - positioned in the gap */
-        .ecosystem-hub {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90px;
-            height: 90px;
-            background: var(--bg);
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            box-shadow: 0 0 30px rgba(201,162,39,0.2);
-        }
-        
-        .ecosystem-hub::before {
-            content: '';
-            position: absolute;
-            inset: -6px;
-            border-radius: 50%;
-            border: 1px dashed rgba(201,162,39,0.3);
-            animation: hub-rotate 25s linear infinite;
-        }
-        
-        @keyframes hub-rotate {
-            to { transform: rotate(360deg); }
-        }
-        
-        .ecosystem-hub-icon {
-            font-size: 1.5rem;
-            font-family: 'Playfair Display', serif;
-            font-weight: 500;
-            color: var(--primary);
-            line-height: 1;
-        }
-        
-        .ecosystem-hub-text {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--primary);
-            font-weight: 600;
-            margin-top: 0.25rem;
-        }
-        
-        /* Connection lines using pseudo-elements */
-        .ecosystem-wrapper::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 10%;
-            right: 10%;
-            height: 1px;
-            background: linear-gradient(90deg, rgba(201,162,39,0.3), rgba(201,162,39,0.5), rgba(201,162,39,0.3));
-        }
-        
-        .ecosystem-wrapper::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 15%;
-            bottom: 15%;
-            width: 1px;
-            background: linear-gradient(180deg, rgba(201,162,39,0.3), rgba(201,162,39,0.5), rgba(201,162,39,0.3));
-        }
-        
-        /* Ecosystem nodes */
-        .ecosystem-node {
-            position: relative;
-            padding: 1.5rem;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            transition: all 0.4s var(--ease);
-        }
-        
-        .ecosystem-node:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(201,162,39,0.15);
-        }
-        
-        .ecosystem-node-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-        }
-        
-        .ecosystem-node-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--bg);
-            flex-shrink: 0;
-            transition: all 0.3s var(--ease);
-        }
-        .ecosystem-node-icon svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--bg);
-        }
-        
-        .ecosystem-node .ecosystem-node-icon { background: linear-gradient(135deg, var(--primary), var(--primary-light)); }
-        
-        .ecosystem-node:hover .ecosystem-node-icon {
-            transform: scale(1.1);
-        }
-        
-        .ecosystem-node h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text);
-        }
-        
-        .ecosystem-node p {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-        
-        /* Status indicator */
-        .ecosystem-node-status {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            padding-top: 0.75rem;
-            border-top: 1px solid var(--border);
-        }
-        
-        .ecosystem-node-status-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: status-blink 2s ease-in-out infinite;
-        }
-        
-        @keyframes status-blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-        
-        .ecosystem-node-status span {
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
-        @media (max-width: 768px) {
-            .ecosystem-wrapper { padding: 1.5rem 0; }
-            .ecosystem-grid { gap: 5rem 2rem; }
-            .ecosystem-hub { width: 70px; height: 70px; }
-            .ecosystem-hub-icon { font-size: 1.25rem; }
-            .ecosystem-hub-text { font-size: 0.5rem; }
-            .ecosystem-node { padding: 1.25rem; }
-            .ecosystem-node h4 { font-size: 0.9rem; }
-            .ecosystem-node p { font-size: 0.8rem; }
-            .ecosystem-node-icon { width: 36px; height: 36px; font-size: 1rem; }
-        }
-        
-        @media (max-width: 500px) {
-            .ecosystem-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .ecosystem-hub { display: none; }
-            .ecosystem-wrapper::before, .ecosystem-wrapper::after { display: none; }
-        }
-
-        /* Agents */
-        .agents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-top: 3rem; }
-        .agent-card {
-            padding: 2rem; background: var(--bg-elevated); border: 1px solid var(--border);
-            border-radius: 16px; text-align: center; transition: all 0.4s var(--ease);
-        }
-        .agent-card:hover { transform: translateY(-8px); border-color: var(--primary); }
-        .agent-icon {
-            width: 64px; height: 64px;
-            border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;
-            position: relative;
-            font-size: 1.5rem; font-family: 'Playfair Display', serif; font-weight: 500; color: var(--bg);
-        }
-        .agent-icon svg {
-            stroke: var(--bg);
-            z-index: 1;
-        }
-        /* Agent avatar styling - robot-like appearance */
-        .agent-icon::before {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            border: 2px dashed currentColor;
-            opacity: 0.3;
-            animation: agent-orbit 10s linear infinite;
-        }
-        .agent-icon::after {
-            content: '';
-            position: absolute;
-            top: 6px;
-            right: 8px;
-            width: 10px;
-            height: 10px;
-            background: currentColor;
-            border-radius: 50%;
-            animation: agent-blink 3s ease-in-out infinite;
-            box-shadow: 0 0 8px currentColor;
-        }
-        @keyframes agent-orbit {
-            to { transform: rotate(360deg); }
-        }
-        @keyframes agent-blink {
-            0%, 90%, 100% { opacity: 1; transform: scale(1); }
-            95% { opacity: 0.3; transform: scale(0.8); }
-        }
-        .agent-icon { 
-            background: linear-gradient(135deg, var(--primary), var(--primary-light)); 
-            box-shadow: 0 0 30px rgba(201,162,39,0.3);
-        }
-        .agent-icon::before,
-        .agent-icon::after { color: var(--primary); }
-        .agent-card:hover .agent-icon::before {
-            animation-duration: 3s;
-        }
-        .agent-card h3 { font-size: 1rem; margin-bottom: 0.5rem; }
-        .agent-card p { font-size: 0.85rem; color: var(--text-muted); font-weight: 300; }
-        /* Agent status indicator */
-        .agent-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            margin-top: 1rem;
-            padding: 0.35rem 0.75rem;
-            background: rgba(255,255,255,0.03);
-            border-radius: 100px;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-dim);
-        }
-        .agent-status-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            animation: status-blink 2s ease-in-out infinite;
-        }
-        .agent-card:nth-child(1) .agent-status-dot { background: var(--primary); }
-        .agent-card:nth-child(2) .agent-status-dot { background: var(--primary-light); }
-        .agent-card:nth-child(3) .agent-status-dot { background: var(--secondary); }
-        .agent-card:nth-child(4) .agent-status-dot { background: var(--accent); }
-
-        /* Activations */
-        .activations { background: var(--bg-elevated); max-width: none; width: 100%; }
-        .activations > .reveal { max-width: 1200px; margin: 0 auto; }
-        .activations-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-top: 3rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .activation-card {
-            padding: 2rem;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            transition: all 0.4s var(--ease);
-            position: relative;
-            overflow: hidden;
-        }
-        .activation-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--primary-light));
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        .activation-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(201,162,39,0.4);
-            box-shadow: 0 20px 40px rgba(201,162,39,0.15);
-        }
-        .activation-card:hover::before { opacity: 1; }
-        .activation-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.25rem;
-            transition: transform 0.3s var(--ease);
-        }
-        .activation-icon svg {
-            stroke: var(--bg);
-        }
-        .activation-card:hover .activation-icon {
-            transform: scale(1.1);
-        }
-        .activation-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-        }
-        .activation-card p {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 1.25rem;
-        }
-        .activation-tag {
-            display: inline-block;
-            padding: 0.4rem 0.85rem;
-            background: rgba(201,162,39,0.1);
-            border: 1px solid rgba(201,162,39,0.25);
-            border-radius: 100px;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--primary);
-        }
-        @media (max-width: 1024px) {
-            .activations-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 600px) {
-            .activations-grid { grid-template-columns: 1fr; }
-        }
-
-        /* Spaces */
-        .spaces { background: var(--bg-elevated); max-width: none; width: 100%; }
-        .spaces-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.3fr 1fr; gap: 4rem; align-items: center; }
-        .spaces-visual {
-            aspect-ratio: 16/10; background: var(--bg); border: 1px solid var(--border); border-radius: 24px;
-            position: relative; overflow: hidden;
-        }
-        .spaces-visual-bg {
-            position: absolute; inset: 0;
-            background: linear-gradient(135deg, rgba(201,162,39,0.2), transparent 50%), linear-gradient(225deg, rgba(232,197,71,0.15), transparent 50%);
-        }
-        .spaces-visual-title {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-family: 'Playfair Display', serif; font-size: 2.5rem; font-style: italic; opacity: 0.15;
-        }
-        .spaces-visual-label {
-            position: absolute; bottom: 1.5rem; left: 1.5rem;
-            display: flex; align-items: center; gap: 0.5rem;
-            padding: 0.6rem 1rem; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px);
-            border-radius: 100px; font-size: 0.85rem;
-        }
-        .spaces-visual-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .spaces-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 1rem; }
-        .spaces-content > p { color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem; font-weight: 300; line-height: 1.8; }
-        .space-formats { display: flex; flex-direction: column; gap: 0.75rem; }
-        .space-format {
-            display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem;
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
-            transition: all 0.3s var(--ease);
-        }
-        .space-format:hover { border-color: var(--primary); transform: translateX(8px); }
-        .space-format-icon {
-            width: 40px; height: 40px; background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.25rem;
-        }
-        .space-format h4 { font-size: 0.95rem; margin-bottom: 0.2rem; }
-        .space-format p { font-size: 0.85rem; color: var(--text-muted); }
-
-        /* Founders */
-        .founders { border-top: 1px solid var(--border); }
-        .founders-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3rem; }
-        .founders h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 1rem; }
-        .founders > div > p { color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem; font-weight: 300; }
-        .founders-benefits { display: flex; flex-direction: column; gap: 0.75rem; }
-        .founders-benefit {
-            display: flex; align-items: center; gap: 0.75rem; padding: 0.875rem 1rem;
-            background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 10px;
-        }
-        .founders-benefit::before { content: '✓'; color: var(--primary); }
-        .founders-benefit span { font-size: 0.9rem; }
-        .founders-card {
-            padding: 3rem; background: linear-gradient(135deg, rgba(201,162,39,0.08) 0%, var(--bg-elevated) 100%); border: 1px solid rgba(201,162,39,0.4);
-            border-radius: 24px; text-align: center;
-        }
-        .founders-card-logo { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 0.25rem; }
-        .founders-card-logo span { color: var(--primary); }
-        .founders-card-sub { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 2rem; }
-        .founders-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-        .founders-stat-value { font-family: 'Playfair Display', serif; font-size: 1.75rem; color: var(--primary); }
-        .founders-stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); }
-
-        /* CTA */
-        .cta {
-            text-align: center; padding: 10rem 2rem; max-width: none; width: 100%;
-            background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(201,162,39,0.2), transparent 70%),
-                        radial-gradient(ellipse 40% 30% at 30% 60%, rgba(232,197,71,0.1), transparent 60%),
-                        radial-gradient(ellipse 40% 30% at 70% 40%, rgba(0,102,255,0.08), transparent 60%);
-        }
-        .cta h2 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 1rem; }
-        .cta p { font-size: 1.2rem; color: var(--text-muted); max-width: 500px; margin: 0 auto 2.5rem; font-weight: 300; }
-
-        /* Contact */
-        .contact { background: var(--bg-elevated); max-width: none; width: 100%; padding: 0; }
-        .contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; min-height: 100vh; }
-        .contact-info { padding: 6rem 3rem; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--border); }
-        .contact-info h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3vw, 2.75rem); margin-bottom: 1rem; }
-        .contact-info > p { color: var(--text-muted); font-size: 1rem; margin-bottom: 2.5rem; font-weight: 300; line-height: 1.8; }
-        .contact-info .contact-summary { margin-bottom: 1.5rem; }
-        .contact-details { display: flex; flex-direction: column; gap: 1.25rem; }
-        .contact-detail { display: flex; align-items: center; gap: 1rem; }
-        .contact-detail-icon {
-            width: 48px; height: 48px; background: rgba(201,162,39,0.1); border: 1px solid rgba(201,162,39,0.25);
-            border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;
-        }
-        .contact-detail-text { font-size: 0.8rem; color: var(--text-dim); }
-        .contact-detail-value { font-size: 1rem; font-weight: 500; }
-        .contact-form-wrap { padding: 6rem 3rem; display: flex; flex-direction: column; justify-content: center; }
-        .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-        .form-group label { font-size: 0.85rem; color: var(--text-muted); }
-        .form-group input, .form-group select, .form-group textarea {
-            padding: 1rem; background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
-            color: var(--text); font-family: 'Outfit', sans-serif; font-size: 1rem; transition: border-color 0.3s;
-        }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(201,162,39,0.15);
-        }
-        .form-group textarea { min-height: 120px; resize: vertical; }
-        .form-group select { cursor: pointer; }
-        .form-submit button {
-            width: 100%; padding: 1.25rem; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: var(--bg);
-            border: none; border-radius: 12px; font-family: 'Outfit', sans-serif;
-            font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s var(--ease);
-        }
-        .form-submit button:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(201,162,39,0.5); }
-
-        /* Footer */
-        footer { padding: 3rem 2rem; border-top: 1px solid var(--border); background: linear-gradient(180deg, transparent 0%, rgba(201,162,39,0.03) 100%); }
-        .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
-        .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; background: linear-gradient(135deg, var(--text) 0%, var(--premium) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
-        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.3s; }
-        .footer-links a:hover { color: var(--primary); }
-        .footer-copy { font-size: 0.8rem; color: var(--text-dim); }
-
-        /* Reveal animation */
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .philosophy-inner, .spaces-inner, .founders-layout, .contact-inner { grid-template-columns: 1fr; }
-            .flywheel-container { min-height: 450px; margin-top: 3rem; }
-            .flywheel { max-width: 480px; margin: 0 auto; }
-            .flywheel-stage { width: 140px; padding: 1rem; }
-            .flywheel-stage-title { font-size: 0.9rem; }
-            .flywheel-stage-desc { font-size: 0.7rem; }
-            .contact-info { border-right: none; border-bottom: 1px solid var(--border); }
-        }
-        @media (max-width: 768px) {
-            nav { padding: 1rem 1.5rem; }
-            .nav-links { display: none; }
-            section { padding: 5rem 1.5rem; }
-            .philosophy, .intelligence, .spaces, .cta { padding: 5rem 1.5rem; }
-            .form-row { grid-template-columns: 1fr; }
-            .contact-info, .contact-form-wrap { padding: 4rem 1.5rem; }
-            .footer-inner { flex-direction: column; text-align: center; }
-            .process-grid { grid-template-columns: 1fr; }
-            
-            /* Flywheel mobile adjustments */
-            .flywheel-container { min-height: 420px; }
-            .flywheel { max-width: 360px; }
-            .flywheel-ring-outer { inset: 50px; }
-            .flywheel-ring-inner { inset: 80px; }
-            .flywheel-ring-glow { inset: 65px; }
-            .flywheel-stage { width: 120px; padding: 0.875rem; }
-            .flywheel-stage-1 { top: -5px; }
-            .flywheel-stage-2 { bottom: 25px; right: -15px; }
-            .flywheel-stage-3 { bottom: 25px; left: -15px; }
-            .flywheel-stage-num { width: 30px; height: 30px; font-size: 1rem; margin-bottom: 0.5rem; }
-            .flywheel-stage-title { font-size: 0.85rem; }
-            .flywheel-stage-desc { font-size: 0.65rem; }
-            .flywheel-center { width: 100px; height: 100px; }
-            .flywheel-center-icon { font-size: 1.5rem; }
-            .flywheel-center-text { font-size: 0.6rem; }
-        }
-    </style>
+    <script type="module" src="/src/main.js"></script>
 </head>
-<body>
+<body class="loading">
+    <div class="bg-mesh" aria-hidden="true">
+        <div class="bg-mesh-blob bg-mesh-blob-1"></div>
+        <div class="bg-mesh-blob bg-mesh-blob-2"></div>
+        <div class="bg-mesh-blob bg-mesh-blob-3"></div>
+        <div class="bg-mesh-blob bg-mesh-blob-4"></div>
+    </div>
+    <div class="bg-glossy-sheen" aria-hidden="true"></div>
     <div class="loader" id="loader"><div class="loader-logo">Attrakt</div></div>
 
     <nav id="navbar">
         <div class="nav-inner">
             <a href="#" class="logo">Attrakt</a>
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
                 <a href="#philosophy">Philosophy</a>
                 <a href="#intelligence">Intelligence</a>
                 <a href="#services">Services</a>
-                <a href="#contact">Contact Us</a>
+            </div>
+            <div class="nav-right">
+                <a href="#contact" class="nav-cta">Get Started</a>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
     </nav>
@@ -1148,41 +50,45 @@
             <h1>Turn your top 1%<br>into your <em>growth engine</em></h1>
             <p class="hero-desc">We deliver premium developer experiences that transform your most engaged users into advocates. Intelligence-driven services that unlock organic growth for technology companies.</p>
             <div class="hero-ctas">
-                <a href="#contact" class="btn btn-primary">Start a conversation →</a>
+                <a href="#contact" class="btn btn-primary">Trends report</a>
                 <a href="#philosophy" class="btn btn-secondary">Our approach</a>
             </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll-line"></div>
         </div>
     </section>
 
     <section class="logos">
         <p class="logos-label">Trusted by technology leaders across Web2 and Web3</p>
         <div class="logos-grid">
-            <img src="public/logos/ElizaOS.svg" alt="Eliza Labs">
-            <img src="public/logos/API%23.svg" alt="API3">
-            <img src="public/logos/eOracle.png" alt="eOracle" style="width: 160px;">
-            <img src="public/logos/The Grid.png" alt="The Grid">
-            <img src="public/logos/8004logowhite.png" alt="8004 & Ethereum Foundation">
-            <img src="public/logos/Assisterr.svg" alt="Assisterr">
+            <img src="/logos/ElizaOS.svg" alt="Eliza Labs">
+            <img src="/logos/API3.svg" alt="API3">
+            <img src="/logos/eOracle.png" alt="eOracle" style="width: 160px;">
+            <img src="/logos/TheGrid.png" alt="The Grid">
+            <img src="/logos/8004logowhite.png" alt="8004 & Ethereum Foundation">
+            <img src="/logos/Assisterr.svg" alt="Assisterr">
         </div>
     </section>
 
     <section class="philosophy" id="philosophy">
         <div class="philosophy-inner">
             <div class="reveal">
-                <h2>The best growth is <em>earned</em>, not bought</h2>
-                <p>Paid acquisition is a race to the bottom. The technology companies that win build genuine advocacy among their most engaged users. We help you identify, nurture, and activate the top 1% who become your organic growth engine.</p>
+                <h2 class="section-title">Your community is your <em>most undervalued</em> growth asset</h2>
+                <p>Most technology companies pour budget into paid acquisition while their most engaged developers and creators go unrecognised. The result? A revolving door of users, declining trust, and a community that talks about you less and less.</p>
                 <div class="philosophy-points">
                     <div class="philosophy-point">
                         <span class="philosophy-point-num">1</span>
-                        <div><h4>Identify your champions</h4><p>Intelligence-driven discovery of high-potential developers and creators</p></div>
+                        <div><h4>Neglected communities erode</h4><p>Without intentional investment, your most vocal supporters disengage -- and take their influence with them</p></div>
                     </div>
                     <div class="philosophy-point">
                         <span class="philosophy-point-num">2</span>
-                        <div><h4>Deliver premium experiences</h4><p>High-touch programs, exclusive access, and genuine relationship building</p></div>
+                        <div><h4>Paid growth has diminishing returns</h4><p>Every dollar spent on acquisition costs more over time, while organic advocacy compounds</p></div>
                     </div>
                     <div class="philosophy-point">
                         <span class="philosophy-point-num">3</span>
-                        <div><h4>Unlock advocacy</h4><p>Advocates create content, refer peers, and defend your brand organically</p></div>
+                        <div><h4>Advocacy is the growth multiplier</h4><p>When your top 1% become champions, they create content, refer peers, and defend your brand -- for free</p></div>
                     </div>
                 </div>
             </div>
@@ -1215,30 +121,26 @@
                     <div class="flywheel-particle flywheel-particle-2"></div>
                     <div class="flywheel-particle flywheel-particle-3"></div>
                     
-                    <!-- Stage 1: Identify -->
                     <div class="flywheel-stage flywheel-stage-1">
                         <div class="flywheel-stage-num">1</div>
                         <div class="flywheel-stage-title">Identify</div>
-                        <div class="flywheel-stage-desc">Discover high-potential champions</div>
+                        <div class="flywheel-stage-desc">Find your highest-potential community members</div>
                     </div>
-                    
-                    <!-- Stage 2: Experience -->
+
                     <div class="flywheel-stage flywheel-stage-2">
                         <div class="flywheel-stage-num">2</div>
-                        <div class="flywheel-stage-title">Experience</div>
-                        <div class="flywheel-stage-desc">Deliver premium, high-touch programs</div>
+                        <div class="flywheel-stage-title">Invest</div>
+                        <div class="flywheel-stage-desc">Strategic campaigns & premium experiences</div>
                     </div>
-                    
-                    <!-- Stage 3: Advocacy -->
+
                     <div class="flywheel-stage flywheel-stage-3">
                         <div class="flywheel-stage-num">3</div>
-                        <div class="flywheel-stage-title">Advocacy</div>
-                        <div class="flywheel-stage-desc">Unlock organic growth & referrals</div>
+                        <div class="flywheel-stage-title">Advocate</div>
+                        <div class="flywheel-stage-desc">They become your organic growth engine</div>
                     </div>
-                    
-                    <!-- Center hub -->
+
                     <div class="flywheel-center">
-                        <span class="flywheel-center-text">Growth</span>
+                        <span class="flywheel-center-text">Advocacy</span>
                     </div>
                 </div>
             </div>
@@ -1246,95 +148,125 @@
     </section>
 
     <section class="intelligence" id="intelligence">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <div class="reveal" style="text-align: center; margin-bottom: 2rem;">
+        <div class="intelligence-container">
+            <div class="reveal" style="text-align: center; margin-bottom: 3.5rem;">
                 <p class="section-label">Attrakt Intelligence</p>
-                <h2 class="section-title">An integrated ecosystem for understanding your community</h2>
-                <p class="section-desc" style="margin: 0 auto;">Every data point connects. Our platform weaves together community signals, user journeys, and program outcomes into a unified intelligence layer.</p>
+                <h2 class="section-title">Your ecosystem, unified</h2>
+                <p class="section-desc" style="margin: 0 auto;">We integrate into your community, sales, and marketing stack to build a single intelligence layer -- giving you a complete understanding of your ecosystem, and us the ability to craft impactful campaigns.</p>
             </div>
-            
-            <div class="ecosystem-wrapper reveal">
-                <!-- Central hub -->
-                <div class="ecosystem-hub">
-                    <span class="ecosystem-hub-icon">A</span>
-                    <span class="ecosystem-hub-text">Unified</span>
+
+            <div class="data-platform reveal">
+                <div class="data-sources">
+                    <div class="data-source">
+                        <div class="data-source-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h4>Community</h4>
+                        <ul class="data-source-points">
+                            <li>Discord & Telegram</li>
+                            <li>GitHub activity</li>
+                            <li>Forum engagement</li>
+                            <li>Sentiment signals</li>
+                        </ul>
+                        <div class="data-source-pulse">
+                            <span class="data-source-pulse-dot"></span>
+                            <span>Ingesting</span>
+                        </div>
+                    </div>
+
+                    <div class="data-source">
+                        <div class="data-source-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                <polyline points="17 6 23 6 23 12"/>
+                            </svg>
+                        </div>
+                        <h4>Sales</h4>
+                        <ul class="data-source-points">
+                            <li>CRM pipelines</li>
+                            <li>Lead attribution</li>
+                            <li>Conversion funnels</li>
+                            <li>Revenue signals</li>
+                        </ul>
+                        <div class="data-source-pulse">
+                            <span class="data-source-pulse-dot"></span>
+                            <span>Ingesting</span>
+                        </div>
+                    </div>
+
+                    <div class="data-source">
+                        <div class="data-source-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                            </svg>
+                        </div>
+                        <h4>Marketing</h4>
+                        <ul class="data-source-points">
+                            <li>Campaign performance</li>
+                            <li>Content analytics</li>
+                            <li>Social engagement</li>
+                            <li>Event & activation data</li>
+                        </ul>
+                        <div class="data-source-pulse">
+                            <span class="data-source-pulse-dot"></span>
+                            <span>Ingesting</span>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="ecosystem-grid">
-                    <!-- Node 1: Community Health -->
-                    <div class="ecosystem-node">
-                        <div class="ecosystem-node-header">
-                            <div class="ecosystem-node-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-                                </svg>
-                            </div>
-                            <h4>Community Health Scoring</h4>
-                        </div>
-                        <p>Real-time sentiment and engagement across all channels</p>
-                        <div class="ecosystem-node-status">
-                            <span class="ecosystem-node-status-dot"></span>
-                            <span>Live data feed</span>
-                        </div>
+
+                <div class="data-flow-lines">
+                    <div class="data-flow-line"></div>
+                    <div class="data-flow-line"></div>
+                    <div class="data-flow-line"></div>
+                </div>
+
+                <div class="data-platform-hub">
+                    <div class="data-platform-hub-glow"></div>
+                    <div class="data-platform-hub-inner">
+                        <span class="data-platform-hub-logo">A</span>
+                        <span class="data-platform-hub-label">Intelligence Platform</span>
                     </div>
-                    
-                    <!-- Node 2: Champion ID -->
-                    <div class="ecosystem-node">
-                        <div class="ecosystem-node-header">
-                            <div class="ecosystem-node-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                            </div>
-                            <h4>Champion Identification</h4>
+                </div>
+
+                <div class="data-flow-lines data-flow-lines-out">
+                    <div class="data-flow-line"></div>
+                    <div class="data-flow-line"></div>
+                    <div class="data-flow-line"></div>
+                </div>
+
+                <div class="data-outputs">
+                    <div class="data-output">
+                        <div class="data-output-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
                         </div>
-                        <p>AI-powered discovery of high-potential advocates</p>
-                        <div class="ecosystem-node-status">
-                            <span class="ecosystem-node-status-dot"></span>
-                            <span>ML scoring active</span>
-                        </div>
+                        <h4>Champion Scoring</h4>
+                        <p>Identify your highest-potential advocates across all touchpoints</p>
                     </div>
-                    
-                    <!-- Node 3: Journey Analytics -->
-                    <div class="ecosystem-node">
-                        <div class="ecosystem-node-header">
-                            <div class="ecosystem-node-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="18" y1="20" x2="18" y2="10"/>
-                                    <line x1="12" y1="20" x2="12" y2="4"/>
-                                    <line x1="6" y1="20" x2="6" y2="14"/>
-                                    <path d="M3 3l7.07 7.07"/>
-                                    <path d="M10.07 10.07L17 3"/>
-                                    <polyline points="14 3 17 3 17 6"/>
-                                </svg>
-                            </div>
-                            <h4>Journey Analytics</h4>
+                    <div class="data-output">
+                        <div class="data-output-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
                         </div>
-                        <p>Funnel tracking from awareness to advocacy</p>
-                        <div class="ecosystem-node-status">
-                            <span class="ecosystem-node-status-dot"></span>
-                            <span>Tracking events</span>
-                        </div>
+                        <h4>Ecosystem Health</h4>
+                        <p>Real-time pulse on community sentiment and engagement</p>
                     </div>
-                    
-                    <!-- Node 4: Program ROI -->
-                    <div class="ecosystem-node">
-                        <div class="ecosystem-node-header">
-                            <div class="ecosystem-node-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <path d="M12 6v6l4 2"/>
-                                    <path d="M16 16l2 2"/>
-                                    <path d="M8 16l-2 2"/>
-                                </svg>
-                            </div>
-                            <h4>Program ROI</h4>
+                    <div class="data-output">
+                        <div class="data-output-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
                         </div>
-                        <p>Attribution for every initiative and campaign</p>
-                        <div class="ecosystem-node-status">
-                            <span class="ecosystem-node-status-dot"></span>
-                            <span>Attribution active</span>
-                        </div>
+                        <h4>Program Attribution</h4>
+                        <p>Measure ROI for every initiative, campaign, and activation</p>
                     </div>
                 </div>
             </div>
@@ -1344,190 +276,250 @@
     <section id="services">
         <div class="reveal">
             <p class="section-label">What We Do</p>
-            <h2 class="section-title">Premium services, powered by intelligence</h2>
-            <p class="section-desc">An always-on, retained ecosystem growth service combining strategy, content, and developer marketing—powered by intelligence and designed to scale with your team.</p>
+            <h2 class="section-title">Your retained growth partner</h2>
+            <p class="section-desc">We embed alongside your team as an always-on strategic partner -- combining technical marketing, community, and developer activation into unified campaigns that move your ecosystem forward.</p>
+            <a href="#contact" class="btn btn-primary" style="margin-top: 2rem;">Trends report</a>
         </div>
         <div class="services-wrapper">
-            <!-- Flow connectors -->
-            <div class="services-flow">
-                <div class="services-flow-line services-flow-line-1"></div>
-                <div class="services-flow-arrow services-flow-arrow-1"></div>
-                <div class="services-flow-line services-flow-line-2"></div>
-                <div class="services-flow-arrow services-flow-arrow-2"></div>
-            </div>
             <div class="services-grid">
                 <div class="service-card reveal">
-                    <h3>Plan</h3>
-                    <p class="service-subtitle">Define your path to organic growth</p>
+                    <h3>Strategy</h3>
+                    <p class="service-subtitle">The foundation for every campaign</p>
                     <div class="service-features">
-                        <div class="service-feature">Ecosystem discovery & mapping</div>
-                        <div class="service-feature">Value proposition development</div>
-                        <div class="service-feature">Growth & GTM strategy</div>
-                    </div>
-                    <div class="service-intelligence">
-                        <span class="service-intelligence-dot"></span>
-                        <span>Powered by Intelligence</span>
+                        <div class="service-feature">Ecosystem mapping & positioning</div>
+                        <div class="service-feature">Go-to-market & growth strategy</div>
+                        <div class="service-feature">Audience segmentation & targeting</div>
                     </div>
                 </div>
                 <div class="service-card reveal">
-                    <h3>Grow</h3>
-                    <p class="service-subtitle">Scale your reach and community</p>
+                    <h3>Marketing</h3>
+                    <p class="service-subtitle">Campaigns that resonate with your community</p>
                     <div class="service-features">
-                        <div class="service-feature">Content creation</div>
-                        <div class="service-feature">Ecosystem development</div>
-                        <div class="service-feature">Community activations</div>
-                    </div>
-                    <div class="service-intelligence">
-                        <span class="service-intelligence-dot"></span>
-                        <span>Powered by Intelligence</span>
+                        <div class="service-feature">Content & narrative development</div>
+                        <div class="service-feature">Community growth & engagement</div>
+                        <div class="service-feature">Developer or creator marketing</div>
                     </div>
                 </div>
                 <div class="service-card reveal">
-                    <h3>Build</h3>
-                    <p class="service-subtitle">Turn developers into advocates</p>
+                    <h3>Experience</h3>
+                    <p class="service-subtitle">Where advocacy is born</p>
                     <div class="service-features">
-                        <div class="service-feature">Developer onboarding (DX)</div>
-                        <div class="service-feature">Demo projects & workshops</div>
-                        <div class="service-feature">Technical content</div>
-                    </div>
-                    <div class="service-intelligence">
-                        <span class="service-intelligence-dot"></span>
-                        <span>Powered by Intelligence</span>
+                        <div class="service-feature">Developer experience & onboarding</div>
+                        <div class="service-feature">Champion programs & activations</div>
+                        <div class="service-feature">Events, retreats & workshops</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="agents">
-        <div class="reveal">
-            <p class="section-label">AI Agent Swarm</p>
-            <h2 class="section-title">An intelligent workforce for your organization</h2>
-            <p class="section-desc">Our AI agent swarm supercharges every retained engagement by combining real-time data, proven strategy, and intelligent automation. Each agent shares context across your ecosystem—turning insights into action and multiplying your team's impact across documentation, community, security, and growth.</p>
-        </div>
-        <div class="agents-grid">
-            <div class="agent-card reveal">
-                <div class="agent-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        <path d="M9 12l2 2 4-4"/>
-                    </svg>
-                </div>
-                <h3>Audit Agent</h3>
-                <p>Security scanning and code review for community contributions</p>
+    <section class="agents" id="agents">
+        <div class="agents-inner">
+            <div class="agents-header reveal">
+                <p class="section-label">AI Agent Swarm</p>
+                <h2 class="section-title">An agentic workforce that scales with you</h2>
+                <p class="section-desc">Our AI agents share context across your ecosystem, turning insights into action and multiplying your team's impact.</p>
             </div>
-            <div class="agent-card reveal">
-                <div class="agent-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
+            <div class="agents-list">
+                <div class="agents-item reveal">
+                    <div class="agents-item-indicator"></div>
+                    <div class="agents-item-content">
+                        <div class="agents-item-top">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="M9 12l2 2 4-4"/>
+                            </svg>
+                            <h3>Audit Agent</h3>
+                        </div>
+                        <p>Security scanning and code review for community contributions</p>
+                    </div>
                 </div>
-                <h3>Community Agent</h3>
-                <p>Monitors channels, triages questions, and surfaces insights</p>
-            </div>
-            <div class="agent-card reveal">
-                <div class="agent-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <polyline points="10 9 9 9 8 9"/>
-                    </svg>
+                <div class="agents-item reveal">
+                    <div class="agents-item-indicator"></div>
+                    <div class="agents-item-content">
+                        <div class="agents-item-top">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            <h3>Community Agent</h3>
+                        </div>
+                        <p>Monitors channels, triages questions, and surfaces insights</p>
+                    </div>
                 </div>
-                <h3>Docs Agent</h3>
-                <p>Auto-generates and maintains documentation from your codebase</p>
-            </div>
-            <div class="agent-card reveal">
-                <div class="agent-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                        <polyline points="17 6 23 6 23 12"/>
-                    </svg>
+                <div class="agents-item reveal">
+                    <div class="agents-item-indicator"></div>
+                    <div class="agents-item-content">
+                        <div class="agents-item-top">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10 9 9 9 8 9"/>
+                            </svg>
+                            <h3>Docs Agent</h3>
+                        </div>
+                        <p>Auto-generates and maintains documentation from your codebase</p>
+                    </div>
                 </div>
-                <h3>Growth Agent</h3>
-                <p>Identifies opportunities and automates outreach at scale</p>
+                <div class="agents-item reveal">
+                    <div class="agents-item-indicator"></div>
+                    <div class="agents-item-content">
+                        <div class="agents-item-top">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                <polyline points="17 6 23 6 23 12"/>
+                            </svg>
+                            <h3>Growth Agent</h3>
+                        </div>
+                        <p>Identifies opportunities and automates outreach at scale</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="activations" id="activations">
-        <div class="reveal">
-            <p class="section-label">Premium Developer Activations</p>
-            <h2 class="section-title">High-touch experiences that create lasting impact</h2>
-            <p class="section-desc">Bespoke, high-touch activations delivered on top of your retainer—transforming engaged developers into passionate advocates through unforgettable experiences.</p>
+        <div class="activations-thread" aria-hidden="true"></div>
+
+        <div class="activations-hero reveal">
+            <p class="activations-eyebrow">The Human Layer</p>
+            <h2 class="section-title activations-headline">Where <em>community</em> becomes <em>culture</em></h2>
+            <p class="activations-lead">Technology connects systems. People connect ecosystems. Shared experiences -- the kind that happen face-to-face, away from screens -- transform scattered individuals into a real community with lasting bonds.</p>
         </div>
-        <div class="activations-grid">
-            <div class="activation-card reveal">
-                <div class="activation-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                    </svg>
+
+        <div class="activations-mosaic">
+            <div class="activations-mosaic-feature reveal">
+                <div class="activations-mosaic-img">
+                    <img src="/hf_20260210_142813_4415de53-d936-49ed-9c22-528892c5a22d-1.png" alt="Developers collaborating at a retreat" loading="lazy">
+                    <div class="activations-mosaic-img-overlay"></div>
                 </div>
-                <h3>Exclusive Retreats</h3>
-                <p>Intimate gatherings in inspiring locations bringing together your top developers for deep technical sessions and relationship building</p>
-                <div class="activation-tag">High-touch</div>
-            </div>
-            <div class="activation-card reveal">
-                <div class="activation-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-                        <polyline points="2 17 12 22 22 17"/>
-                        <polyline points="2 12 12 17 22 12"/>
-                    </svg>
+                <div class="activations-mosaic-body">
+                    <span class="activations-number">01</span>
+                    <h3>Exclusive Retreats</h3>
+                    <p>Three days in an inspiring setting. No keynotes, no pitches -- just the most passionate developers building together, sharing meals, and forming bonds that outlast any Slack channel. The relationships forged here become the backbone of a thriving community.</p>
                 </div>
-                <h3>Hackathon Experiences</h3>
-                <p>Premium hackathons with expert mentorship, high-value prizes, and pathways to grants or investment for standout projects</p>
-                <div class="activation-tag">Build together</div>
             </div>
-            <div class="activation-card reveal">
-                <div class="activation-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="2" y1="12" x2="22" y2="12"/>
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                    </svg>
+
+            <div class="activations-mosaic-row">
+                <div class="activations-mosaic-item reveal reveal-delay-1">
+                    <div class="activations-mosaic-img activations-mosaic-img-sm">
+                        <img src="/hf_20260210_143029_5898eb59-910e-4af8-81e2-9a31b30760b8-1.png" alt="Hackathon in progress" loading="lazy">
+                        <div class="activations-mosaic-img-overlay"></div>
+                    </div>
+                    <div class="activations-mosaic-body">
+                        <span class="activations-number">02</span>
+                        <h3>Hackathon Experiences</h3>
+                        <p>Not another corporate hackathon. Premium, curated events with real mentorship, meaningful prizes, and pathways to grants -- where the best ideas get built and the builders get remembered.</p>
+                    </div>
                 </div>
-                <h3>Global Roadshows</h3>
-                <p>Curated developer meetups and workshops in key tech hubs, creating local communities connected to your global ecosystem</p>
-                <div class="activation-tag">Scale globally</div>
-            </div>
-            <div class="activation-card reveal">
-                <div class="activation-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
-                        <path d="M5 8H4a4 4 0 0 0 0 8h1"/>
-                        <line x1="6" y1="12" x2="18" y2="12"/>
-                        <circle cx="12" cy="12" r="2"/>
-                    </svg>
+                <div class="activations-mosaic-item reveal reveal-delay-2">
+                    <div class="activations-mosaic-img activations-mosaic-img-sm">
+                        <img src="/hf_20260210_143044_82a77518-9d73-4af9-b93b-c79d8eded939_(1)-1.png" alt="Global developer meetup" loading="lazy">
+                        <div class="activations-mosaic-img-overlay"></div>
+                    </div>
+                    <div class="activations-mosaic-body">
+                        <span class="activations-number">03</span>
+                        <h3>Global Roadshows</h3>
+                        <p>Taking the community to the world. Intimate meetups and workshops in key tech cities -- connecting local developers to a global movement they want to be part of.</p>
+                    </div>
                 </div>
-                <h3>Developer Pop-Ups</h3>
-                <p>Surprise activations and immersive experiences that spark conversation, build culture, and create moments developers share organically</p>
-                <div class="activation-tag">Culture catalyst</div>
             </div>
+
+            <div class="activations-mosaic-item activations-mosaic-wide reveal">
+                <div class="activations-mosaic-body">
+                    <span class="activations-number">04</span>
+                    <h3>Developer Pop-Ups</h3>
+                    <p>The unexpected moments that become legends. Surprise activations, immersive experiences, and creative gatherings that spark conversation, define culture, and give developers stories they tell for years.</p>
+                </div>
+                <div class="activations-mosaic-img activations-mosaic-img-wide">
+                    <img src="/hf_20260210_144021_7746d2d7-1c34-420f-9e3c-14ba975ac509-1.png" alt="Creative developer pop-up event" loading="lazy">
+                    <div class="activations-mosaic-img-overlay"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="activations-coda reveal">
+            <blockquote>Every activation is designed around one belief: when developers share a real experience together, they don't just remember the product -- they carry the community forward.</blockquote>
         </div>
     </section>
 
-    <section class="contact" id="contact">
+<section class="contact" id="contact">
+    <div class="trends-report-cta reveal" id="trends-report">
+        <div class="trends-report-cta-content">
+            <h3>Weekly Insights & Trends Report</h3>
+            <p>Strategic insights on developer marketing, community activation and ecosystem growth from industry. Delivered to your inbox once a week.</p>
+        </div>
+        <form id="attrakt-form" onsubmit="return handleAttraktSubscribe(event)" style="display: flex; gap: 8px; width: 100%; max-width: 480px;">
+            <input type="email" name="email" placeholder="you@company.com" required style="flex: 1; padding: 12px 16px; border: 1px solid rgba(201,168,76,0.3); border-radius: 6px; font-size: 14px; color: #fff; background: rgba(255,255,255,0.08); outline: none;" onfocus="this.style.borderColor='#C9A84C'" onblur="this.style.borderColor='rgba(201,168,76,0.3)'" />
+            <button type="submit" class="trends-report-cta-btn" style="white-space: nowrap;">Receive Weekly Report</button>
+        </form>
+        <p id="attrakt-status" style="margin: 10px 0 0; font-size: 13px; min-height: 20px; color: #C9A84C;"></p>
+    </div>
+</section>
+
+<script>
+async function handleAttraktSubscribe(e) {
+    e.preventDefault();
+    const form = document.getElementById("attrakt-form");
+    const status = document.getElementById("attrakt-status");
+    const btn = form.querySelector("button[type=submit]");
+
+    btn.disabled = true;
+    btn.textContent = "...";
+    status.textContent = "";
+
+    try {
+        const res = await fetch("https://attrakt-trends-agent.onrender.com/api/subscribe", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: form.email.value }),
+        });
+
+        const result = await res.json();
+
+        if (res.ok) {
+            status.textContent = "You're in. Your first briefing arrives this Sunday.";
+            form.reset();
+        } else {
+            status.textContent = result.error || "Something went wrong.";
+            status.style.color = "#c0392b";
+        }
+    } catch (err) {
+        status.textContent = "Network error. Please try again.";
+        status.style.color = "#c0392b";
+    }
+
+    btn.disabled = false;
+    btn.textContent = "Receive Weekly Report";
+}
+</script>
         <div class="contact-inner">
             <div class="contact-info">
-                <h2 class="reveal">Let's build something together</h2>
-                <p class="reveal">We help technology companies grow through ecosystem development and developer marketing—backed by intelligence, retained partnerships, AI agents, and premium activations.</p>
-                <ul class="reveal contact-summary">
-                    <li><strong>Intelligence</strong> — research &amp; insights</li>
-                    <li><strong>Retained services</strong> — ecosystem &amp; developer marketing</li>
-                    <li><strong>Agents</strong> — AI-powered engagement at scale</li>
-                    <li><strong>Premium activations</strong> — events &amp; campaigns</li>
-                </ul>
-                <p class="reveal">Whether you're a developer platform, open-source project, blockchain protocol, or any technology company looking to grow through developer advocacy—we'd love to hear from you.</p>
+                <h1 class="reveal">Let's build something together</h1>
+                <p class="reveal">We help technology companies grow through unlocking developer or user advocacy -- combining intelligence, strategy, marketing services and premium experiences to turn your ecosystem into a growth engine.</p>
                 <div class="contact-details reveal">
-                    <div class="contact-detail"><div class="contact-detail-icon">✉️</div><div><p class="contact-detail-text">Email us at</p><p class="contact-detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1b9b4bdbdbe91b0a5a5a3b0baa5ffb8be">[email&#160;protected]</a></p></div></div>
-                    <div class="contact-detail"><div class="contact-detail-icon">📍</div><div><p class="contact-detail-text">Visit us at</p><p class="contact-detail-value">Cursor Cafe, Madrid</p></div></div>
-                    <div class="contact-detail"><div class="contact-detail-icon">🐦</div><div><p class="contact-detail-text">Follow us</p><p class="contact-detail-value">@AttraktHQ</p></div></div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </div>
+                        <div><p class="contact-detail-text">Email us at</p><p class="contact-detail-value"><a href="mailto:hello@attrakt.io">hello@attrakt.io</a></p></div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div><p class="contact-detail-text">Visit us at</p><p class="contact-detail-value">Cursor Cafe, Madrid</p></div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                        </div>
+                        <div><p class="contact-detail-text">Follow us</p><p class="contact-detail-value"><a href="https://twitter.com/AttraktHQ" target="_blank" rel="noopener">@AttraktHQ</a></p></div>
+                    </div>
                 </div>
             </div>
             <div class="contact-form-wrap">
@@ -1566,43 +558,9 @@
                 <a href="#services">Services</a>
                 <a href="#contact">Contact Us</a>
             </div>
-            <span class="footer-copy">© 2025 Attrakt. All rights reserved.</span>
+            <span class="footer-copy">© 2026 Attrakt. All rights reserved.</span>
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Loader
-        window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1200));
-
-        // Navbar scroll
-        window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50));
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', e => {
-                e.preventDefault();
-                const target = document.querySelector(a.getAttribute('href'));
-                if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-            });
-        });
-
-        // Reveal on scroll
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // Form
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('button');
-            btn.textContent = 'Sending...';
-            btn.disabled = true;
-            setTimeout(() => {
-                btn.textContent = 'Message sent!';
-                btn.style.backgroundColor = 'var(--secondary)';
-            }, 2000);
-        });
-    </script>
 </body>
 </html>

@@ -4,9 +4,9 @@
   "description": "Premium Developer Experience & Ecosystem Growth - Turn your top 1% into your growth engine",
   "main": "index.html",
   "scripts": {
-    "dev": "npx serve .",
-    "start": "npx serve .",
-    "build": "echo 'Static site - no build required'"
+    "dev": "vite",
+    "start": "vite preview",
+    "build": "vite build"
   },
   "keywords": [
     "developer-experience",
@@ -26,5 +26,9 @@
   "homepage": "https://attrakt.io",
   "devDependencies": {
     "serve": "^14.2.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.95.3",
+    "vite": "^7.3.1"
   }
 }
